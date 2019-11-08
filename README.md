@@ -6,7 +6,7 @@ This application is targeted at university students, who want to seek out help i
 - [Nathan Scheele](team/NathanScheele.md)
 - [Will Creonte](team/WillCreonte.md)
 - [Dan Obichie](team/DanObichie.md)
-- [Matt Spahl](team/MattSpahl)
+- [Matt Spahl](team/MATTHEW_SPAHL.md)
 # Topic Requirements
 - Database
 - WebSockets
