@@ -1,6 +1,5 @@
-# CampusVerse
-A chat-based application aimed at encouraging collaboration and communication between peers.
-This application is targeted at university students, who want to seek out help in their classes, but are too shy to do so in person.
+# What's in my Fridge?
+A web-based application that keeps track of what a user has in their fridge, in order to reduce food waste and make meal planning and grocery shopping easier
 
 # Collaborators
 - [Nathan Scheele](team/NATHAN_SCHEELE.md)
@@ -9,4 +8,4 @@ This application is targeted at university students, who want to seek out help i
 - [Matt Spahl](team/MATTHEW_SPAHL.md)
 # Topic Requirements
 - Database
-- WebSockets
+- Server-Side
