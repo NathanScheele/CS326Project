@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/NathanScheele/CS326Project#readme",
   "dependencies": {
+    "browser-sync": "^2.26.7",
     "express": "^4.17.1",
-    "mongoose": "^5.7.10"
+    "mongoose": "^5.7.10",
+    "nodemon": "^1.19.4"
   }
 }
