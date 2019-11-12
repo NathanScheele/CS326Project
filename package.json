@@ -4,7 +4,7 @@
   "description": "A web-application, which allows users to keep track of the food in their fridges, in order to reduce waste",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
