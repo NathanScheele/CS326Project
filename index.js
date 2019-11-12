@@ -1,17 +1,21 @@
-const express = require('express');
+const app = require('./server/server.js');
+const mongoose = require('mongoose');
 const browserSync = require('browser-sync');
-const path = require('path');
 
 let app = express();
-let port = process.env.PORT || 3000;
+let port = 3000;
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/html/index.html'));
-}).listen(port, listening);
+// set mongoURI
+var mongoURI = process.env.MONGODB_URI
+// connect db
+mongoose.connect(mongoURI);
+
+app.listen(port, listening);
 
 function listening () {
   browserSync({
     proxy: 'localhost:' + port,
-    files: ['public/**/*.{js,html}']
+    files: ['public/**/*.{js,html,css}']
   });
 }
+console.log("Server is listening on port " + port);
