@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="..\CSS\style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>What's In My Fridge?</title>
 </head>
 <body>
@@ -49,11 +49,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title>Add an Item!</h2>
+                        <h2 class="modal-title">Add an Item!</h2>
                         <button type="button" class="close"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <p>This is the modal body, do you like it?</p>
+                        <form>
+                           <div class="userForm">
+                               <label for="defaultForm-username" id="ulabel" class="uLabel">Name of Item</label>
+                               <input type="username" id="defaultForm-username" class="form-control validate">
+                          </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary">Confirm</button>
@@ -61,9 +66,38 @@
                 </div>
             </div>
     </div>
-    
+    <div class="modal" id="login">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Login</h2>
+                        <button type="button" class="close"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                           <div class="userForm">
+                               <label for="defaultForm-username" id="ulabel" class="uLabel">Username</label>
+                               <input type="username" id="defaultForm-username" class="form-control validate">
+                          </div>
+                          <div class="userForm">
+                                <label for="defaultForm-password" id="ulabel" class="uLabel">Password</label>
+                                <input type="password" id="defaultForm-password" class="form-control validate">
+                           </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="makeacct"> Sign Up</button>
+                        <button type="button" class="btn btn-secondary">Confirm</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+
     <div class="row">
             <div class="col">
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">
+                            Login
+                </button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Adder">
                     Add an Item
                 </button>
