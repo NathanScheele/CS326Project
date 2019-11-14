@@ -1,6 +1,5 @@
 const app = require('./server/server.js');
 const mongoose = require('mongoose');
-const browserSync = require('browser-sync');
 
 let port = 3000;
 
