@@ -9,12 +9,5 @@ var mongoURI = process.env.MONGODB_URI
 // connect db
 mongoose.connect(mongoURI);
 
-app.listen(port, listening);
-
-function listening () {
-  browserSync({
-    proxy: 'localhost:' + port,
-    files: ['public/**/*.{js,html,css}']
-  });
-}
+app.listen(port);
 console.log("Server is listening on port " + port);
