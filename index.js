@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 
 let port = 3000;
 
-// set mongoURI
-var mongoURI = process.env.MONGODB_URI
 // connect db
-mongoose.connect(mongoURI);
+mongoose.connect(process.env.MONGODB_URI, 
+{
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+}).then(() => console.log('DB Connected!')
+).catch(err => {console.log(`DB Connection Error: ${err.message}`);});
 
 app.listen(port);
-console.log("Server is listening on port " + port);

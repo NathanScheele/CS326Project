@@ -52,7 +52,7 @@
                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        <form action="http://localhost:3000/api/login" method="GET">
+                        <form>
                             <div class="userForm">
                                 <label for="defaultForm-username" id="ulabel" class="uLabel">Username</label>
                                 <input type="username" id="defaultForm-username" class="form-control validate">
@@ -64,8 +64,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="makeacct"> Sign Up</button>
-                        <button type="button" class="btn btn-secondary">Confirm</button>
+                        <button type="button" class="makeacct" id="signup"> Sign Up</button>
+                        <button type="button" class="btn btn-secondary" id="confirm">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -95,3 +95,21 @@
     </div>
 </body>
 </html>
+<script>
+    var signup = document.getElementById("signup");
+    var confirm = document.getElementById("confirm");
+
+    signup.addEventListener("click", signupHandler);
+    confirm.addEventListener("click", confirmHandler);
+
+    function signupHandler(){
+        //extract form to redirect to another form
+
+    }
+
+    function confirmHandler(){
+        //extract form to redirect to api server
+    }
+
+
+</script>
