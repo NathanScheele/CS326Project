@@ -5,10 +5,10 @@
     width: 50%;
   }
   
-  body{
+  /*body{
     background-color: black;
     color: #ffffff;
-  }
+  }*/
   
   /* Create three unequal columns that floats next to each other */
   .column {
@@ -36,6 +36,8 @@
       background-color: #6e6eee;
       color: #ffffff;
       text-align: center;
+      padding: 2%;
+      display: block;
 
   }
 
@@ -43,3 +45,11 @@
     color: black;
   }
 
+header{
+  background: cornflowerblue;
+  line-height: 50px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
