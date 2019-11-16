@@ -5,7 +5,7 @@ const passwordHash = require('password-hash');
 const secret = process.env.JWT_SECRET
 
 module.exports = {
-  // signin method
+
   signin: function(req, res){
     let name = req.body.username;
     let pwd = req.body.password;
@@ -19,9 +19,9 @@ module.exports = {
         if(user.length == 1){//If the username is found, verify the given password with the hashed password from Mongo
           if(passwordHash.verify(pwd,user[0].password)){
             console.log("Login success!");
-            let token = jwt.encode({username: user.username}, secret);
+            let token = jwt.encode({id: user[0].id}, secret);
             //Responds with a jwt token and the mongo_id
-            res.status(200).json({token: token, id: user[0].id})
+            res.status(200).json({token: token})
           }
           else{//throw an error if the password is incorrect
             console.log("ERROR: invalid password!");
@@ -59,9 +59,9 @@ module.exports = {
             } 
             else {
               console.log("mongo create user success!")
-              let token = jwt.encode({username: user.username}, secret);
+              let token = jwt.encode({id: user.id}, secret);
               //Responds with a jwt token and the mongo_id
-              res.status(200).json({token: token, id: user.id})
+              res.status(200).json({token: token})
             }
           });
         }
@@ -72,5 +72,27 @@ module.exports = {
         }
       }
     });
+  },
+
+  addItem: function(req, res){
+    let token = req.token;
+    let loc = req.location;
+    let item = req.item;
+
+    const decoded = jwt.decode(token, secret);
+
+    User.findById(decoded.id, function(err, user){
+      if (err) { //throws errow if something goes wrong when contacting the database
+        console.log("mongo err: ", err);
+        res.status(500).send(err);
+      } 
+      else {
+
+        let token = jwt.encode({id: user.id}, secret);
+        //Responds with a jwt token and the mongo_id
+        res.status(200).json({token: token})
+      }
+    });
+
   }
 };
