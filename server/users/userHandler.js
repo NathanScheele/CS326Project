@@ -6,6 +6,7 @@ const secret = process.env.JWT_SECRET
 
 module.exports = {
 
+  //req should be in the form of {name: <user's name>, password: <user's password>}
   signin: function(req, res){
     let name = req.body.username;
     let pwd = req.body.password;
@@ -36,6 +37,7 @@ module.exports = {
     });
   },
 
+  //req should be in the form of {name: <user's name>, password: <user's password>}
   signup: function(req, res){
     let name = req.body.username;
     let pwd = req.body.password;
@@ -60,6 +62,7 @@ module.exports = {
             else {
               console.log("mongo create user success!")
               let token = jwt.encode({id: user.id}, secret);
+              console.log(typeof(token))
               //Responds with a jwt token and the mongo_id
               res.status(200).json({token: token})
             }
@@ -74,25 +77,73 @@ module.exports = {
     });
   },
 
+  //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <name: <name of food>>}
   addItem: function(req, res){
-    let token = req.token;
-    let loc = req.location;
-    let item = req.item;
+    let token = req.body.token;
+    let loc = req.body.location;
+    let item = req.body.item;
 
-    const decoded = jwt.decode(token, secret);
+    let decoded = jwt.decode(token, secret);
 
-    User.findById(decoded.id, function(err, user){
+    User.findById(decoded.id, function(err, user) {
       if (err) { //throws errow if something goes wrong when contacting the database
         console.log("mongo err: ", err);
         res.status(500).send(err);
       } 
       else {
+        if(loc == "fridge"){
+          user.fridge.push(item)
+        }
+        else{
+          user.freezer.push(item);
+        }
 
-        let token = jwt.encode({id: user.id}, secret);
-        //Responds with a jwt token and the mongo_id
-        res.status(200).json({token: token})
+        user.save(function (err, user) {
+          if(err){
+            console.log("ERROR: unable to update")
+            res.status(500).send(err)
+          }
+          else{
+            console.log("Update successful");
+            res.status(200).send("Update successful")
+          }
+        });
       }
-    });
+   });
+  },
 
+  //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <food item to removed>}
+  removeItem: function(req, res){
+    let token = req.body.token;
+    let loc = req.body.location;
+    let item = req.body.item;
+
+    const decoded = jwt.decode(token, secret);
+
+    User.findById(decoded.id, function(err, user) {
+      if (err) { //throws errow if something goes wrong when contacting the database
+        console.log("mongo err: ", err);
+        res.status(500).send(err);
+      } 
+      else {
+        if(loc == "fridge"){
+          user.fridge.splice(user.fridge.indexOf(item), 1);
+        }
+        else{
+          user.freezer.splice(user.fridge.indexOf(item), 1);
+        }
+
+        user.save(function (err, user) {
+          if(err){
+            console.log("ERROR: unable to update")
+            res.status(500).send("Error: unable to update")
+          }
+          else{
+            console.log("Update successful");
+            res.status(200).send("Update successful")
+          }
+        });
+      }
+   });
   }
 };
