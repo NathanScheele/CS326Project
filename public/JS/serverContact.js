@@ -7,8 +7,8 @@ $("#signup").click(function() {
 
     // Create a credential object from the form fields
     var credentials = {
-       username: $("input[name='usrSignUp']").val(),
-       password: $("input[name='pwdSignUp']").val()
+       "username": $("input[name='usrSignUp']").val(),
+       "password": $("input[name='pwdSignUp']").val()
     };
 
     // POST a request with the JSON-encoded song to the Server API
@@ -62,8 +62,10 @@ $("#itemConfirm").click(function() {
 
     // Create a credential object from the form fields
     var item = {
-       name: $('input[name = "itemName"]').val(),
-       date: $('input[name = "expDate"]').val()
+       "name": $('input[name = "itemName"]').val(),
+       "expDate": $('input[name = "expDate"]').val(),
+    //    "datePurchased": $
+    //    "quantity": 
     };
 
     // POST a request with the JSON-encoded song to the Server API
