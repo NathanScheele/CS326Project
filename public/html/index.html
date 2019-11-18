@@ -17,8 +17,11 @@
      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src= "../JS/serverContact.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   
     
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
             <a href="index.html" class="navbar-brand">Home</a>
@@ -95,3 +98,90 @@
     </div>
 </body>
 </html>
+<!-- <script>
+$("#signup").click(function() {   
+    // var genre = [];
+    // if ($("#genre").val()) {
+    //     // Create an array from the comma-separated values
+    //     genre = $("#genre").val().split(",");
+    // }
+
+    // Create a credential object from the form fields
+    var credentials = {
+       "username": $("input[name='usrSignUp']").val(),
+       "password": $("input[name='pwdSignUp']").val()
+    };
+
+    // POST a request with the JSON-encoded song to the Server API
+    $.ajax({
+        async: true,
+        crossDomain: true,
+        type: "POST",
+        url: "http://localhost:3000/api/signup",
+        data: JSON.stringify(credentials),
+        contentType: "application/json"
+    }).done(function(data) {
+        // Reset the form after saving the song
+        $("form").trigger("reset");
+    }).fail(function(jqXHR) {
+        $("#error").html("The user could not be registered.");
+    });
+});
+
+//LOGIN
+$("#confirm").click(function() {   
+    // var genre = [];
+    // if ($("#genre").val()) {
+    //     // Create an array from the comma-separated values
+    //     genre = $("#genre").val().split(",");
+    // }
+
+    // Create a credential object from the form fields
+    var credentials = {
+        username: $("input[name='usrSignUp']").val(),
+        password: $("input[name='pwdSignUp']").val()
+    };
+
+    // POST a request with the JSON-encoded credentials to the Server API
+    $.ajax({
+        type: "GET",
+        url: "/api/signin",
+        data: JSON.stringify(credentials),
+        contentType: "application/json"
+    }).done(function(data) {
+        // Reset the form after saving the song
+        $("form").trigger("reset");
+    }).fail(function(jqXHR) {
+        $("#error").html("The user could not be registered.");
+    });
+});
+
+$("#itemConfirm").click(function() {   
+    // var genre = [];
+    // if ($("#genre").val()) {
+    //     // Create an array from the comma-separated values
+    //     genre = $("#genre").val().split(",");
+    // }
+
+    // Create a credential object from the form fields
+    var item = {
+       "name": $('input[name = "itemName"]').val(),
+       "expDate": $('input[name = "expDate"]').val(),
+       "purchaseDate": $('input[name = "purchaseDate"]').val(),
+       "quantity": $('input[name = "quantity"]').val()
+    };
+
+    // POST a request with the JSON-encoded song to the Server API
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:3000/api/signup",
+        data: JSON.stringify(item),
+        contentType: "application/json"
+    }).done(function(data) {
+        // Reset the form after saving the song
+        $("form").trigger("reset");
+    }).fail(function(jqXHR) {
+        $("#error").html("The user could not be registered.");
+    });
+});
+</script> -->
