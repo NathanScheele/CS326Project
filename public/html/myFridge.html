@@ -13,6 +13,8 @@
     <title>What's In My Fridge?</title>
 </head>
 
+<script src = "validate.js" defer></script>
+
 <body>
     <header>
         <h1>What's In My Fridge?</h1>
@@ -62,10 +64,10 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="myForm">
                         <div class="userForm">
                             <label for="defaultForm-username" id="ulabel" class="uLabel">Name of Item</label>
-                            <input type="username" id="defaultForm-username" class="form-control validate">
+                            <input type="username" id="defaultForm-username" class="form-control validate" required>
                         </div>
                         <div class="userForm">
                             <label for="defaultForm-expDate" id="ulabel" class="uLabel">Expiration Date</label>
