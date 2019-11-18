@@ -14,7 +14,7 @@ $("#signup").click(function() {
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "POST",
-        url: "/api/signup",
+        url: "http://localhost:3000/api/signup",
         data: JSON.stringify(credentials),
         contentType: "application/json"
     }).done(function(data) {
@@ -42,7 +42,7 @@ $("#confirm").click(function() {
     // POST a request with the JSON-encoded credentials to the Server API
     $.ajax({
         type: "GET",
-        url: "/api/signin",
+        url: "http://localhost:3000/api/signin",
         data: JSON.stringify(credentials),
         contentType: "application/json"
     }).done(function(data) {
@@ -71,7 +71,7 @@ $("#itemConfirm").click(function() {
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "PUT",
-        url: "/api/signup",
+        url: "http://localhost:3000/api/addItem",
         data: JSON.stringify(item),
         contentType: "application/json"
     }).done(function(data) {
