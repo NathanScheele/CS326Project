@@ -64,8 +64,8 @@ $("#itemConfirm").click(function() {
     var item = {
        "name": $('input[name = "itemName"]').val(),
        "expDate": $('input[name = "expDate"]').val(),
-    //    "datePurchased": $
-    //    "quantity": 
+       "purchaseDate": $('input[name = "purchaseDate"]').val(),
+       "quantity": $('input[name = "quantity"]').val()
     };
 
     // POST a request with the JSON-encoded song to the Server API
