@@ -68,11 +68,14 @@ $("#itemConfirm").click(function() {
     });
 });
 
+let dataset = null;
 //get all of the data for the user when you open the page
 $(document).ready(function(){
-    // $.ajax({ url: "http://localhost:3000/api/signup",
-    //         context: document.body,
-    //         success: function(){
-    //            alert("done");
-    //         }});
+    $.ajax({type="GET",
+            url: "http://localhost:3000/api/signup",
+            context: document.body,
+            success: function(data){
+               alert("done");
+               dataset = data;
+            }});
 });
