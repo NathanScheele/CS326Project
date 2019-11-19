@@ -1,4 +1,4 @@
-$("button[id='signup']").click(function() {   
+$("#signup").click(function() {   
 
     // Create a credential object from the form fields
     var credentials = {
@@ -21,7 +21,7 @@ $("button[id='signup']").click(function() {
 });
 
 //LOGIN
-$("button[id='login']").click(function() {   
+$("#login").click(function() {   
 
     // Create a credential object from the form fields
     var credentials = {
