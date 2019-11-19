@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 let UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    fridge: [{name: String, expDate: Date}],
-    freezer: [{name: String, expDate: Date}]
+    fridge: [{name: String, expDate: Date, dateBought: Date, quantity: Number}],
+    freezer: [{name: String, expDate: Date, dateBought: Date, quantity: Number}]
 });
 
 // Export this schema to make it available from other files
