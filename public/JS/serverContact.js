@@ -3,7 +3,8 @@ $("#signup").click(function() {
     // Create a credential object from the form fields
     var credentials = {
        "username": $("input[name='usrSignUp']").val(),
-       "password": $("input[name='pwdSignUp']").val()
+       "password": $("input[name='pwdSignUp']").val(),
+       "email": $("input[name='emailSignUp']").val()
     };
 
     // POST a request with the JSON-encoded song to the Server API
