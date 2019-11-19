@@ -10,5 +10,5 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   
   // use express.static to serve client folder
-  app.use(express.static(__dirname + '/../../public/html'));
+  app.use(express.static(__dirname + '/../../public'));
 };
