@@ -1,9 +1,4 @@
 $("#signup").click(function() {   
-    // var genre = [];
-    // if ($("#genre").val()) {
-    //     // Create an array from the comma-separated values
-    //     genre = $("#genre").val().split(",");
-    // }
 
     // Create a credential object from the form fields
     var credentials = {
@@ -18,7 +13,8 @@ $("#signup").click(function() {
         data: JSON.stringify(credentials),
         contentType: "application/json"
     }).done(function(data) {
-        // Reset the form after saving the song
+        localStorage.setItem('token', data.token);
+
         $("form").trigger("reset");
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
@@ -27,11 +23,6 @@ $("#signup").click(function() {
 
 //LOGIN
 $("#confirm").click(function() {   
-    // var genre = [];
-    // if ($("#genre").val()) {
-    //     // Create an array from the comma-separated values
-    //     genre = $("#genre").val().split(",");
-    // }
 
     // Create a credential object from the form fields
     var credentials = {
@@ -46,7 +37,8 @@ $("#confirm").click(function() {
         data: JSON.stringify(credentials),
         contentType: "application/json"
     }).done(function(data) {
-        // Reset the form after saving the song
+
+        localStorage.setItem('token', data.token);
         $("form").trigger("reset");
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
@@ -54,11 +46,9 @@ $("#confirm").click(function() {
 });
 
 $("#itemConfirm").click(function() {   
-    // var genre = [];
-    // if ($("#genre").val()) {
-    //     // Create an array from the comma-separated values
-    //     genre = $("#genre").val().split(",");
-    // }
+
+    //get jwt token from localStorage
+    let token = localStorage.getItem('token');
 
     // Create a credential object from the form fields
     var item = {
@@ -72,7 +62,7 @@ $("#itemConfirm").click(function() {
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/addItem",
-        data: JSON.stringify(item),
+        data: JSON.stringify({"token": token, "item": item, "location": 'fridge'}),
         contentType: "application/json"
     }).done(function(data) {
         // Reset the form after saving the song
@@ -80,4 +70,13 @@ $("#itemConfirm").click(function() {
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
     });
+});
+
+//get all of the data for the user when you open the page
+$(document).ready(function(){
+    $.ajax({ url: "http://localhost:3000/api/signup",
+            context: document.body,
+            success: function(){
+               alert("done");
+            }});
 });
