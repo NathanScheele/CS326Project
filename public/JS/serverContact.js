@@ -1,21 +1,20 @@
 $("#signup").click(function() {   
 
     // Create a credential object from the form fields
-    var credentials = {
-       "username": $("input[name='usrSignUp']").val(),
-       "password": $("input[name='pwdSignUp']").val()
+    let credentials = {
+       username: $("input[name='usrSignUp']").val(),
+       password: $("input[name='pwdSignUp']").val()
     };
-
-    // POST a request with the JSON-encoded song to the Server API
+    // POST a request with the user credentials to the Server API
     $.ajax({
         type: "POST",
         url: "http://localhost:3000/api/signup",
         data: credentials
     }).done(function(data) {
+        //Store the jwt token for later use
         localStorage.setItem('token', data.token);
+        //redirect to the Fridge
         document.url = "myFridge.html";
-
-        //$("form").trigger("reset");
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
     });
@@ -23,23 +22,22 @@ $("#signup").click(function() {
 
 //LOGIN
 $("#login").click(function() {   
-
     // Create a credential object from the form fields
-    var credentials = {
+    let credentials = {
         username: $("input[name='usrSignUp']").val(),
         password: $("input[name='pwdSignUp']").val()
     };
 
-    // POST a request with the JSON-encoded credentials to the Server API
+    // POST a request with the user credentials to the Server API
     $.ajax({
         type: "GET",
         url: "http://localhost:3000/api/signin",
         data: credentials
     }).done(function(data) {
+        //Store the jwt token for later use
         localStorage.setItem('token', data.token);
+        //redirect to the Fridge
         document.url = "myFridge.html";
-
-        //$("form").trigger("reset");
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
     });
@@ -74,11 +72,11 @@ $("#itemConfirm").click(function() {
 let dataset = null;
 //get all of the data for the user when you open the page
 $(document).ready(function(){
-    $.ajax({type="GET",
-            url: "http://localhost:3000/api/signup",
-            context: document.body,
-            success: function(data){
-               alert("done");
-               dataset = data;
-            }});
+    // $.ajax({type="GET",
+    //         url: "http://localhost:3000/api/signup",
+    //         context: document.body,
+    //         success: function(data){
+    //            alert("done");
+    //            dataset = data;
+    //         }});
 });

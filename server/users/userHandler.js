@@ -6,7 +6,7 @@ const secret = process.env.JWT_SECRET
 
 module.exports = {
 
-  //req should be in the form of {name: <user's name>, password: <user's password>}
+  //req should be in the form of {username: <user's name>, password: <user's password>}
   signin: function(req, res){
     let name = req.query.username;
     let pwd = req.query.password;
@@ -40,8 +40,8 @@ module.exports = {
 
   //req should be in the form of {name: <user's name>, password: <user's password>}
   signup: function(req, res){
-    let name = req.query.username;
-    let pwd = req.query.password;
+    let name = req.body.username;
+    let pwd = req.body.password;
 
     //Checks to see if the given username is already in use
     User.find({ username: name }).exec( function(err, user){
@@ -79,9 +79,9 @@ module.exports = {
 
   //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <name: <name of food>>}
   addItem: function(req, res){
-    let token = req.query.token;
-    let loc = req.query.location;
-    let item = req.query.item;
+    let token = req.body.token;
+    let loc = req.body.location;
+    let item = req.body.item;
 
     let decoded = jwt.decode(token, secret);
 
@@ -114,9 +114,9 @@ module.exports = {
 
   //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <food item to removed>}
   removeItem: function(req, res){
-    let token = req.query.token;
-    let loc = req.query.location;
-    let item = req.query.item;
+    let token = req.body.token;
+    let loc = req.body.location;
+    let item = req.body.item;
 
     const decoded = jwt.decode(token, secret);
 
