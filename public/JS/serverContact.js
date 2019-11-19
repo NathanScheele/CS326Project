@@ -9,7 +9,7 @@ $("button[name='signup']").click(function() {
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "POST",
-        url: "/api/signup",
+        url: "http://localhost:3000/api/signup",
         data: credentials
     }).done(function(data) {
         localStorage.setItem('token', data.token);
@@ -32,7 +32,7 @@ $("button[name='confirm']").click(function() {
     // POST a request with the JSON-encoded credentials to the Server API
     $.ajax({
         type: "GET",
-        url: "/api/signin",
+        url: "http://localhost:3000/api/signin",
         data: credentials
     }).done(function(data) {
         localStorage.setItem('token', data.token);
@@ -58,7 +58,7 @@ $("#itemConfirm").click(function() {
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "PUT",
-        url: "api/addItem",
+        url: "http://localhost:3000/api/addItem",
         data: {"token": token, "item": item, "location": 'fridge'}
     }).done(function(data) {
         // Reset the form after saving the song
