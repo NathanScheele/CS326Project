@@ -3,16 +3,14 @@ $("button[name='signup']").click(function() {
     // Create a credential object from the form fields
     var credentials = {
        "username": $("input[name='usrSignUp']").val(),
-       "password": $("input[name='pwdSignUp']").val(),
-       "email": $("input[name='emailSignUp']").val()
+       "password": $("input[name='pwdSignUp']").val()
     };
 
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/api/signup",
-        data: JSON.stringify(credentials),
-        contentType: "application/json"
+        url: "/api/signup",
+        data: credentials
     }).done(function(data) {
         localStorage.setItem('token', data.token);
 
@@ -34,11 +32,9 @@ $("button[name='confirm']").click(function() {
     // POST a request with the JSON-encoded credentials to the Server API
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/api/signin",
-        data: JSON.stringify(credentials),
-        contentType: "application/json"
+        url: "/api/signin",
+        data: credentials
     }).done(function(data) {
-
         localStorage.setItem('token', data.token);
         $("form").trigger("reset");
     }).fail(function(jqXHR) {
@@ -62,9 +58,8 @@ $("#itemConfirm").click(function() {
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "PUT",
-        url: "http://localhost:3000/api/addItem",
-        data: JSON.stringify({"token": token, "item": item, "location": 'fridge'}),
-        contentType: "application/json"
+        url: "api/addItem",
+        data: {"token": token, "item": item, "location": 'fridge'}
     }).done(function(data) {
         // Reset the form after saving the song
         $("form").trigger("reset");
