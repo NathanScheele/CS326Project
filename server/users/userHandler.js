@@ -8,8 +8,8 @@ module.exports = {
 
   //req should be in the form of {name: <user's name>, password: <user's password>}
   signin: function(req, res){
-    let name = req.body.username;
-    let pwd = req.body.password;
+    let name = req.query.username;
+    let pwd = req.query.password;
 
     //Looks up the username to get the hashed password
     User.find({username: name}, function(err, user){
@@ -17,6 +17,7 @@ module.exports = {
         console.log("mongo find user err: ", err);
       }
       else {
+        console.log(user.length)
         if(user.length == 1){//If the username is found, verify the given password with the hashed password from Mongo
           if(passwordHash.verify(pwd,user[0].password)){
             console.log("Login success!");
@@ -39,8 +40,8 @@ module.exports = {
 
   //req should be in the form of {name: <user's name>, password: <user's password>}
   signup: function(req, res){
-    let name = req.body.username;
-    let pwd = req.body.password;
+    let name = req.query.username;
+    let pwd = req.query.password;
 
     //Checks to see if the given username is already in use
     User.find({ username: name }).exec( function(err, user){
@@ -78,9 +79,9 @@ module.exports = {
 
   //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <name: <name of food>>}
   addItem: function(req, res){
-    let token = req.body.token;
-    let loc = req.body.location;
-    let item = req.body.item;
+    let token = req.query.token;
+    let loc = req.query.location;
+    let item = req.query.item;
 
     let decoded = jwt.decode(token, secret);
 
@@ -113,9 +114,9 @@ module.exports = {
 
   //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <food item to removed>}
   removeItem: function(req, res){
-    let token = req.body.token;
-    let loc = req.body.location;
-    let item = req.body.item;
+    let token = req.query.token;
+    let loc = req.query.location;
+    let item = req.query.item;
 
     const decoded = jwt.decode(token, secret);
 
@@ -147,8 +148,8 @@ module.exports = {
   },
 
   getItems: function(req, res){
-    let token = req.body.token;
-    let loc = req.body.location;
+    let token = req.query.token;
+    let loc = req.query.location;
 
     const decoded = jwt.decode(token, secret);
 
