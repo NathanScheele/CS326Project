@@ -27,6 +27,7 @@ module.exports = function(app, express){
   app.get('/api/signin', userHandler.signin);
   app.put('/api/addItem', userHandler.addItem);
   app.put('/api/removeItem', userHandler.removeItem);
+  app.get('/api/getItems', userHandler.getItems);
   // Add headers
 
 };

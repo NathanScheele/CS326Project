@@ -145,5 +145,27 @@ module.exports = {
         });
       }
    });
+  },
+
+  getItems: function(req, res){
+    let token = req.body.token;
+    let loc = req.body.location;
+
+    const decoded = jwt.decode(token, secret);
+
+    User.findById(decoded.id, function(err, user){
+      if(err){
+        console.log("Error: unable to contact database");
+        res.status(500).send("Error: unable to contact database");
+      }
+      else{
+        if(loc == 'fridge'){
+          res.status(200).json(user.fridge);
+        }
+        else{
+          res.status(200).json(user.freezer);
+        }
+      }
+    });
   }
 };
