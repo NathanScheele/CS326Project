@@ -13,8 +13,9 @@ $("#signup").click(function() {
         data: credentials
     }).done(function(data) {
         localStorage.setItem('token', data.token);
+        document.url = "myFridge.html";
 
-        $("form").trigger("reset");
+        //$("form").trigger("reset");
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
     });
@@ -36,7 +37,9 @@ $("#login").click(function() {
         data: credentials
     }).done(function(data) {
         localStorage.setItem('token', data.token);
-        $("form").trigger("reset");
+        document.url = "myFridge.html";
+
+        //$("form").trigger("reset");
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
     });
