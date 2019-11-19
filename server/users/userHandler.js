@@ -62,7 +62,6 @@ module.exports = {
             else {
               console.log("mongo create user success!")
               let token = jwt.encode({id: user.id}, secret);
-              console.log(typeof(token))
               //Responds with a jwt token and the mongo_id
               res.status(200).json({token: token})
             }
