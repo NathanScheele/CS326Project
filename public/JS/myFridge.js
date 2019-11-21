@@ -23,21 +23,21 @@ $("#itemConfirm").click(function() {
 
     // Create a credential object from the form fields
     var item = {
-       "name": $('input[name = "itemName"]').val(),
-       "expDate": $('input[name = "expDate"]').val(),
-       "purchaseDate": $('input[name = "purchaseDate"]').val(),
-       "quantity": $('input[name = "quantity"]').val()
+       name: $('input[name = "itemName"]').val(),
+       expDate: $('input[name = "expDate"]').val(),
+       purchaseDate: $('input[name = "purchaseDate"]').val(),
+       quantity: $('input[name = "quantity"]').val()
     };
 
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/addItem",
-        data: {"token": token, "item": item, "location": 'fridge'}
+        data: {token: token, item: item, location: 'fridge'}
     }).done(function(data) {
         // Reset the form after saving the song
         $("form").trigger("reset");
     }).fail(function(jqXHR) {
-        $("#error").html("The user could not be registered.");
+        $("#error").html("The item could not be added.");
     });
 });

@@ -83,6 +83,7 @@ module.exports = {
     let loc = req.body.location;
     let item = req.body.item;
 
+    console.log(item)
     let decoded = jwt.decode(token, secret);
 
     User.findById(decoded.id, function(err, user) {

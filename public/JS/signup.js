@@ -14,7 +14,7 @@ $("#signup").click(function() {
         //Store the jwt token for later use
         sessionStorage.setItem('token', data.token);
         //redirect to the Fridge
-        document.url = "myFridge.html";
+        window.location.href = "myFridge.html";
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
     });
