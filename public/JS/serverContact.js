@@ -12,7 +12,7 @@ $("#signup").click(function() {
         data: credentials
     }).done(function(data) {
         //Store the jwt token for later use
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);
         //redirect to the Fridge
         document.url = "myFridge.html";
     }).fail(function(jqXHR) {
@@ -35,7 +35,7 @@ $("#login").click(function() {
         data: credentials
     }).done(function(data) {
         //Store the jwt token for later use
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);
         //redirect to the Fridge
         document.url = "myFridge.html";
     }).fail(function(jqXHR) {
@@ -45,8 +45,8 @@ $("#login").click(function() {
 
 $("#itemConfirm").click(function() {   
 
-    //get jwt token from localStorage
-    let token = localStorage.getItem('token');
+    //get jwt token from sessionStorage
+    let token = sessionStorage.getItem('token');
 
     // Create a credential object from the form fields
     var item = {
