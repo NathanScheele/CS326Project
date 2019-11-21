@@ -9,8 +9,13 @@ $(document).ready(function(){
         url: "http://localhost:3000/api/getItems",
         data: {"token": token, "location": 'fridge'}
     }).done(function(data) {
-        // Reset the form after saving the song
-        $("form").trigger("reset");
+        console.log(data);
+        // edit html
+        Object.entries(data).forEach(
+            ([key, value]) => console.log(key, value)
+            //([key, value]) => console.log(value)
+        );
+
     }).fail(function(jqXHR) {
         $("#error").html("The fridge items could not be accessed from the database.");
     });
