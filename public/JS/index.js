@@ -3,7 +3,7 @@ $("button[name='confirm']").click(function(event) {
 
     var usrName = $("input[name='usrSignUp']");
     var password = $("input[name='pwdSignUp']");
-
+    var ul = $("#uList").html();
     if (usrName.val().length < 5){
         //length less than 5 characters
         usrName.css("background-color", "red");
