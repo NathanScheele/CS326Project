@@ -12,8 +12,8 @@ $(document).ready(function(){
         console.log(data);
         // edit html
         Object.entries(data).forEach(
-            ([key, value]) => console.log(key, value)
-            //([key, value]) => console.log(value)
+            //([key, value]) => console.log(key, value)
+            ([key, value]) => console.log(value("expDate"))
         );
 
     }).fail(function(jqXHR) {
