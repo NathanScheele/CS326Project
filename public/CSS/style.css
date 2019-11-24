@@ -18,11 +18,11 @@
   }
   
   .left, .right {
-    width: 20%;
+    width: 10%;
   }
   
   .middle {
-    width: 60%;
+    width: 80%;
   }
   
   /* Clear floats after the columns */
