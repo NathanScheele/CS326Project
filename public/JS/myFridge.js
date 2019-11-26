@@ -99,15 +99,19 @@ $(document).ready(function(){
             $("#fridgeTableBody").append("<td>" + dateString2 + "</td>");
             $("#fridgeTableBody").append("<td>" + var5 + "</td>");
 
-            let today = new Date();
+            //let today = new Date();
+            var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+            usaTime = new Date(usaTime);
+            console.log('USA time: '+usaTime.toLocaleString())
             // let dd = String(today.getDate()).padStart(2, '0');
             // let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             // let yyyy = today.getFullYear();
-            let dd = today.getDate();
-            let mm = today.getMonth()+1;
-            let yyyy = today.getFullYear();
+            let dd = usaTime.getDate();
+            let mm = usaTime.getMonth()+1;
+            let yyyy = usaTime.getFullYear();
 
             today = mm + '/' + dd + '/' + yyyy;
+            console.log(today);
             if(var3 != null){
                 console.log("hello?");
                 if(yyyy - date1.getFullYear() < 0){
@@ -125,7 +129,8 @@ $(document).ready(function(){
                     console.log("expires later this month")
                     $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                 }
-                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() >= -1){
+                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() <= 0){
+                    console.log("expires soon");
                     $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
                     // $("#fridgeTableBody").append("<div class='container'>" +
                     //     "<div class='row'>" +
@@ -145,19 +150,21 @@ $(document).ready(function(){
                 }
             }
             else{
-                $("#fridgeTableBody").append("<td id='almostExp'>" + "CHECK BEFORE EATING" + "</td>");
+                $("#fridgeTableBody").append("<td id='almostExp'>" + "CAREFUL" + "</td>");
             }
 
-            $("#fridgeTableBody").append("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#Adder'>" +
+            /*button to edit the items - should trigger a modal*/
+            $("#fridgeTableBody").append("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                                "Edit" +
                             "</button>");
 
-            $("#fridgeTableBody").append("<button type='button' class='btn btn-danger' data-toggle='modal' data-target='#Adder' style='height:100%'>" +
-                           " &times;" +
-                         "</button>");
+            /*button to remove items - should just call ajax to remove an item, so change the*/
+            // $("#fridgeTableBody").append("<button type='button' class='btn btn-danger' style='height:100%'>" +
+            //                " &times;" +
+            //              "</button>");
             
             //******************************************* *
-            //Use this to add more buttons at the end. - might want to edit the Edit button above
+            //Use this to add a form inside the td. - might want to edit the Edit button above to open a form instead
             //********************************************* */
             // $("#fridgeTableBody").append("<td>" +
             // "<form>" + 
