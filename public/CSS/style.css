@@ -22,7 +22,7 @@
   }
   
   .middle {
-    width: 80%;
+    width: 90%;
   }
   
   /* Clear floats after the columns */
@@ -39,6 +39,11 @@
       padding: 2%;
       display: block;
 
+  }
+
+  h2.alert-heading{
+    background-color: #cc8888;
+    color: #cc0000;
   }
 
   #uLabel{
@@ -59,3 +64,22 @@ header{
   text-align: center;
   float: center;
 }
+
+#expCell{
+  background-color: #cc8888;
+  color: #000000;
+
+}
+
+#almostExp{
+  background-color: #ffcc00;
+  color: #000000;
+
+}
+
+#okCell{
+  background-color: #66cc66;
+  color: #000000;
+
+}
+
