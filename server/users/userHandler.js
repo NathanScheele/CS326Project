@@ -148,6 +148,42 @@ module.exports = {
    });
   },
 
+  //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <food item to removed>}
+  updateItem: function(req, res){
+    let token = req.body.token;
+    let loc = req.body.location;
+    let oldItem = req.body.oldItem;
+    let newItem = req.body.newItem;
+
+    const decoded = jwt.decode(token, secret);
+
+    User.findById(decoded.id, function(err, user) {
+      if (err) { //throws errow if something goes wrong when contacting the database
+        console.log("mongo err: ", err);
+        res.status(500).send(err);
+      } 
+      else {
+        if(loc == "fridge"){
+          user.fridge[user.fridge.indexOf(oldItem)] = newItem;
+        }
+        else{
+          user.freezer[user.freezer.indexOf(oldItem)] = newItem;
+        }
+
+        user.save(function (err, user) {
+          if(err){
+            console.log("ERROR: unable to update")
+            res.status(500).send("Error: unable to update")
+          }
+          else{
+            console.log("Update successful");
+            res.status(200).send("Update successful")
+          }
+        });
+      }
+   });
+  },
+
   getItems: function(req, res){
     let token = req.query.token;
     let loc = req.query.location;
