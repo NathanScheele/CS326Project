@@ -191,7 +191,7 @@ $("#itemConfirm").click(function() {
     let token = sessionStorage.getItem('token');
 
     // Create a credential object from the form fields
-    var item = {
+    let item = {
        name: $('input[name = "itemName"]').val(),
        expDate: $('input[name = "expDate"]').val(),
        purchaseDate: $('input[name = "purchaseDate"]').val(),
@@ -217,9 +217,12 @@ $("#updateBtn").click(function() {
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
-    // Create a credential object from the form fields
+    //recreate item from table
     let oldItem = {
-       //recreate item from table
+    //    name: $('input[name = "itemName"]').val(),
+    //    expDate: $('input[name = "expDate"]').val(),
+    //    purchaseDate: $('input[name = "purchaseDate"]').val(),
+    //    quantity: $('input[name = "quantity"]').val()
     };
 
     let newItem = {
@@ -248,9 +251,12 @@ $('#itemDelete').click(function(){
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
-    // Create a credential object from the form fields
-    var item = {
-       //recreate item from table
+    //recreate item from table
+    let item = {
+    //    name: $('input[name = "itemName"]').val(),
+    //    expDate: $('input[name = "expDate"]').val(),
+    //    purchaseDate: $('input[name = "purchaseDate"]').val(),
+    //    quantity: $('input[name = "quantity"]').val()
     };
 
     $.ajax({
