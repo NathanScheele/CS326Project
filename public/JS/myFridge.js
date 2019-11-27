@@ -211,29 +211,56 @@ $("#itemConfirm").click(function() {
     });
 });
 
+//handle updating items
+$("#updateBtn").click(function() {   
 
-// $("#updateBtn").click(function() {   
+    //get jwt token from sessionStorage
+    let token = sessionStorage.getItem('token');
 
-//     //get jwt token from sessionStorage
-//     let token = sessionStorage.getItem('token');
+    // Create a credential object from the form fields
+    let oldItem = {
+       //recreate item from table
+    };
 
-//     // Create a credential object from the form fields
-//     var item = {
-//        name: $('input[name = "itemName"]').val(),
-//        expDate: $('input[name = "expDate"]').val(),
-//        purchaseDate: $('input[name = "purchaseDate"]').val(),
-//        quantity: $('input[name = "quantity"]').val()
-//     };
+    let newItem = {
+        name: $('input[name = "itemName"]').val(),
+        expDate: $('input[name = "expDate"]').val(),
+        purchaseDate: $('input[name = "purchaseDate"]').val(),
+        quantity: $('input[name = "quantity"]').val()
+    };
 
-//     // POST a request with the JSON-encoded song to the Server API
-//     $.ajax({
-//         type: "PUT",
-//         url: "http://localhost:3000/api/addItem",
-//         data: {token: token, item: item, location: 'fridge'}
-//     }).done(function(data) {
-//         // Reset the form after saving the song
-//         $("form").trigger("reset");
-//     }).fail(function(jqXHR) {
-//         $("#error").html("The item could not be added.");
-//     });
-// });
+    // POST a request with the JSON-encoded song to the Server API
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:3000/api/updateItem",
+        data: {token: token, oldItem: oldItem, newItem: newItem, location: 'fridge'}
+    }).done(function(data) {
+        // Reset the form after saving the song
+        $("form").trigger("reset");
+    }).fail(function(jqXHR) {
+        $("#error").html("The item could not be added.");
+    });
+});
+
+//handle deleting items
+$('#itemDelete').click(function(){
+
+    //get jwt token from sessionStorage
+    let token = sessionStorage.getItem('token');
+
+    // Create a credential object from the form fields
+    var item = {
+       //recreate item from table
+    };
+
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:3000/api/removeItem",
+        data: {token: token, item: item, location: 'fridge'}
+    }).done(function(data) {
+        // Reset the form after saving the song
+        $("form").trigger("reset");
+    }).fail(function(jqXHR) {
+        $("#error").html("The item could not be added.");
+    });
+});
