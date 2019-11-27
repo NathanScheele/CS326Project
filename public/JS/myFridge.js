@@ -93,7 +93,7 @@ $(document).ready(function(){
 
             //let var5 = currentObject[4][1];
             let var5 = currentObject.quantity;
-            $("#fridgeTableBody").append("<tr></tr>");
+            $("#fridgeTableBody").append("<tr id=" + var1 + "></tr>");
             $("#fridgeTableBody").append("<td>" + var2 + "</td>");
             $("#fridgeTableBody").append("<td>" + dateString1 + "</td>");
             $("#fridgeTableBody").append("<td>" + dateString2 + "</td>");
