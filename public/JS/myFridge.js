@@ -24,6 +24,8 @@ propSort = function(array,prop, prop2, desc) {
 
 //get all of the data for the fridge when you open the page
 $(document).ready(function(){
+
+
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
@@ -237,3 +239,15 @@ $("#itemConfirm").click(function() {
 //         $("#error").html("The item could not be added.");
 //     });
 // });
+
+$("#getRecipes").click(function() { 
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/api/getRecipes",
+        data: {ingredients: ['chicken', 'rice']}
+    }).done(function(data) {
+        console.log(data);
+    }).fail(function(jqXHR) {
+        $("#error").html("The item could not be added.");
+    });
+});
