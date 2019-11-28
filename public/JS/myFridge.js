@@ -93,11 +93,13 @@ $(document).ready(function(){
 
             //let var5 = currentObject[4][1];
             let var5 = currentObject.quantity;
-            $("#fridgeTableBody").append("<tr id=" + var1 + "></tr>");
-            $("#fridgeTableBody").append("<td>" + var2 + "</td>");
-            $("#fridgeTableBody").append("<td>" + dateString1 + "</td>");
-            $("#fridgeTableBody").append("<td>" + dateString2 + "</td>");
-            $("#fridgeTableBody").append("<td>" + var5 + "</td>");
+            // $("#fridgeTableBody").append("<tr id=" + var1 + ">");
+            // $("#fridgeTableBody").append("<td>" + var2 + "</td>");
+            // $("#fridgeTableBody").append("<td>" + dateString1 + "</td>");
+            // $("#fridgeTableBody").append("<td>" + dateString2 + "</td>");
+            // $("#fridgeTableBody").append("<td>" + var5 + "</td></tr>");
+
+            // $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td></tr>");
 
             //let today = new Date();
             var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
@@ -117,21 +119,38 @@ $(document).ready(function(){
                 if(yyyy - date1.getFullYear() < 0){
                     //ok - expires later year
                     console.log("expires next year");
-                    $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
+                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "Edit" +
+                        "</button></td></tr>");
+                    // $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) < 0) {
                     //ok - expires later month
                     console.log("expires in a later month");
-                    $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
+                    //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
+                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "Edit" +
+                        "</button></td></tr>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() < -2){
                     //ok - expires later this month
                     console.log("expires later this month")
-                    $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
+                    //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" + 
+                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "Edit" +
+                        "</button></td></tr>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() <= 0){
                     console.log("expires soon");
-                    $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + 
+                        dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "EXPIRES SOON" + "</td>" +
+                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "Edit" +
+                        "</button></td></tr>");
+                   // $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
                     // $("#fridgeTableBody").append("<div class='container'>" +
                     //     "<div class='row'>" +
                     //         "<div class='col'>" +
@@ -146,17 +165,27 @@ $(document).ready(function(){
                 else{
                     //expired
                     console.log("expiration date passed already.");
-                    $("#fridgeTableBody").append("<td id='expCell'>" + "EXPIRED" + "</td>");
+                    //$("#fridgeTableBody").append("<td id='expCell'>" + "EXPIRED" + "</td>");
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
+                        "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" + 
+                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "Edit" +
+                        "</button></td></tr>");
                 }
             }
             else{
-                $("#fridgeTableBody").append("<td id='almostExp'>" + "CAREFUL" + "</td>");
+                //$("#fridgeTableBody").append("<td id='almostExp'>" + "CAREFUL" + "</td>");
+                $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
+                    "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" + 
+                    "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                    "Edit" +
+                    "</button></td></tr>");
             }
 
             /*button to edit the items - should trigger a modal*/
-            $("#fridgeTableBody").append("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
-                               "Edit" +
-                            "</button>");
+            // $("#fridgeTableBody").append("<button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+            //                    "Edit" +
+            //                 "</button>");
 
             /*button to remove items - should just call ajax to remove an item, so change the*/
             // $("#fridgeTableBody").append("<button type='button' class='btn btn-danger' style='height:100%'>" +
@@ -211,9 +240,39 @@ $("#itemConfirm").click(function() {
     });
 });
 
-//handle updating items
-$("#updateBtn").click(function() {   
+// $('.modal').on('show.bs.modal', function (e) {
+//     let $trigger = $(e.relatedTarget);
+//     //console.log(e.relatedTarget);
+//     //$(e.relatedTarget).data('button');
+//     //let $row = $(this).closest("tr");
+//     var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
+//     $tds = $row.find("td");             // Finds all children <td> elements
 
+//     $.each($tds, function() {               // Visits every single <td> element
+//         console.log($(this).text());        // Prints out the text within the <td>
+//     });
+// });
+
+
+//handle updating items
+// $(".updateBtn").click(function() {  
+//     console.log("you pressed the update button for the first time"); 
+$(document).on("click", ".updateBtn", function(event){
+//$(".updateBtn").on('click', function(event){
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    console.log("here");
+    //let $trigger = $(e.relatedTarget);
+    //console.log(e.relatedTarget);
+    //$(e.relatedTarget).data('button');
+    //let $row = $(this).closest("tr");
+    var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
+    $tds = $row.find("td");             // Finds all children <td> elements
+
+    $.each($tds, function() {               // Visits every single <td> element
+        console.log($(this).text());        // Prints out the text within the <td>
+    });
+    console.log($tds);
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
