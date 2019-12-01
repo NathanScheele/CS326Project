@@ -1,6 +1,6 @@
 let login = document.querySelector("button[name='confirm']");
 
-function validateForm(event) {
+function validateLoginForm(event) {
 
     
     let userName = document.getElementById("defaultForm-username");
@@ -28,7 +28,7 @@ function validateForm(event) {
                 console.log("password is invalid");
                 var errMsg3 = document.createElement("li");
                 password.style.backgroundColor = "Orange";
-                errMsg3.appendChild(document.createTextNode("Password is too short. Password must be at least 6 characters long."))
+                errMsg3.appendChild(document.createTextNode("Password is too short. Must be at least 6 characters long."))
                 ul.appendChild(errMsg3);
                 shouldIStop = 1;
             }
@@ -37,7 +37,7 @@ function validateForm(event) {
             console.log("userName is invalid");
             var errMsg2 = document.createElement("li");
             userName.style.backgroundColor = "Orange";
-            errMsg2.appendChild(document.createTextNode("Username is too short. Name must be at least 6 characters long"));
+            errMsg2.appendChild(document.createTextNode("Username is too short. Must be at least 6 characters long"));
             ul.appendChild(errMsg2);
             shouldIStop = 1;
             if (password.value.length < 1){
@@ -51,18 +51,19 @@ function validateForm(event) {
                 console.log("password is invalid");
                 var errMsg3 = document.createElement("li");
                 password.style.backgroundColor = "Orange";
-                errMsg3.appendChild(document.createTextNode("Password is too short. Password must be at least 6 characters long."))
-                ul.appendChild(errmsg3);
+                errMsg3.appendChild(document.createTextNode("Password is too short. Must be at least 6 characters long."))
+                ul.appendChild(errMsg3);
                 shouldIStop = 1;
             }
         }
 
         if (shouldIStop === 1){
+            document.getElementById("formErrors").value = "unverified"
             event.preventDefault();
         }
         else{
-
         
+            document.getElementById("formErrors").value = "verified"
             //login.screenName.
             userName.style.backgroundColor = "LightGreen";
             //login.zip.
@@ -77,9 +78,12 @@ function validateForm(event) {
   
 }
 
+function validateAddItem(event){
+    
+}
 
  //let myForm = document.querySelector("#myForm");
- document.getElementById("formErrors").style.display = "none";
+ 
     //clear form errors
 
- login.addEventListener("click", validateForm);
+ login.addEventListener("click", validateLoginForm);
