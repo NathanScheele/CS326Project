@@ -1,36 +1,85 @@
-let myForm = document.querySelector("#myForm");
+let login = document.querySelector("button[name='confirm']");
 
 function validateForm(event) {
 
     
-    let userName = myForm.defaultForm-username;
-    let userName = myForm.defaultForm-username;
+    let userName = document.getElementById("defaultForm-username");
+    let password = document.getElementById("defaultForm-password");
+    let ul = document.getElementById("formErrors");
+    let shouldIStop = 0;
+    ul.innerHTML = "";
+    
 
-
-    if(userName.length < 1){
-        console.log("userName is invalid");
-        event.preventDefault();
+    if(userName.value.length < 1){
+            console.log("userName is invalid");
+            var errMsg1 = document.createElement("li");
+            userName.style.backgroundColor = "Orange";
+            errMsg1.appendChild(document.createTextNode("Username is empty."));
+            ul.appendChild(errMsg1);
+            shouldIStop = 1;
+            if (password.value.length < 1){
+                console.log("password is invalid");
+                var errMsg4 = document.createElement("li");
+                password.style.backgroundColor = "Orange";
+                errMsg4.appendChild(document.createTextNode("Password is empty"))
+                ul.appendChild(errMsg4);
+                shouldIStop = 1;
+            }else if (password.value.length < 6){
+                console.log("password is invalid");
+                var errMsg3 = document.createElement("li");
+                password.style.backgroundColor = "Orange";
+                errMsg3.appendChild(document.createTextNode("Password is too short. Password must be at least 6 characters long."))
+                ul.appendChild(errMsg3);
+                shouldIStop = 1;
+            }
+            
+    }else if(userName.value.length < 6){
+            console.log("userName is invalid");
+            var errMsg2 = document.createElement("li");
+            userName.style.backgroundColor = "Orange";
+            errMsg2.appendChild(document.createTextNode("Username is too short. Name must be at least 6 characters long"));
+            ul.appendChild(errMsg2);
+            shouldIStop = 1;
+            if (password.value.length < 1){
+                console.log("password is invalid");
+                var errMsg5 = document.createElement("li");
+                password.style.backgroundColor = "Orange";
+                errMsg5.appendChild(document.createTextNode("Password is empty"))
+                ul.appendChild(errMsg5);
+                shouldIStop = 1;
+            }else if (password.value.length < 6){
+                console.log("password is invalid");
+                var errMsg3 = document.createElement("li");
+                password.style.backgroundColor = "Orange";
+                errMsg3.appendChild(document.createTextNode("Password is too short. Password must be at least 6 characters long."))
+                ul.appendChild(errmsg3);
+                shouldIStop = 1;
+            }
         }
 
-    if(userName.length < 1){
-        console.log("userName is invalid");
-        event.preventDefault();
+        if (shouldIStop === 1){
+            event.preventDefault();
         }
- 
-    myForm.screenName.style.backgroundColor = "LightGreen";
-    myForm.zip.style.backgroundColor = "LightGreen";
-    myForm.tos.style.backgroundColor = "LightGreen";
+        else{
+
+        
+            //login.screenName.
+            userName.style.backgroundColor = "LightGreen";
+            //login.zip.
+            password.style.backgroundColor = "LightGreen";
+            //login.tos.style.backgroundColor = "LightGreen";
+            }
  
     // Replace false with an expression that checks whether myForm.screenName.value is empty.
-    if ( userName.length < 1 ) {
-       myForm.screenName.style.backgroundColor = "Orange";
-    }
+
  
     // Replace false with an expression that checks whether the length of myForm.zip is not 5.
-    if ( password.length < 1 ) {
-       myForm.zip.style.backgroundColor = "Orange";
-    }
- 
+  
 }
+
+
  //let myForm = document.querySelector("#myForm");
- myForm.validate.addEventListener("click", validateForm);
+ document.getElementById("formErrors").style.display = "none";
+    //clear form errors
+
+ login.addEventListener("click", validateForm);
