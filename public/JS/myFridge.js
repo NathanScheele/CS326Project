@@ -122,7 +122,9 @@ $(document).ready(function(){
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
-                        "</button></td></tr>");
+                        //"</button></td></tr>");
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
                     // $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) < 0) {
@@ -132,7 +134,9 @@ $(document).ready(function(){
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
-                        "</button></td></tr>");
+                        //"</button></td></tr>");
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() < -2){
                     //ok - expires later this month
@@ -141,7 +145,9 @@ $(document).ready(function(){
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" + 
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
-                        "</button></td></tr>");
+                        //"</button></td></tr>");
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() <= 0){
                     console.log("expires soon");
@@ -149,7 +155,9 @@ $(document).ready(function(){
                         dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "EXPIRES SOON" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
-                        "</button></td></tr>");
+                        //"</button></td></tr>");
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
                    // $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
                     // $("#fridgeTableBody").append("<div class='container'>" +
                     //     "<div class='row'>" +
@@ -170,7 +178,9 @@ $(document).ready(function(){
                         "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" + 
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
-                        "</button></td></tr>");
+                        // "</button></td></tr>");
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
                 }
             }
             else{
@@ -178,8 +188,8 @@ $(document).ready(function(){
                 $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
                     "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" + 
                     "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
-                    "Edit" +
-                    "</button></td></tr>");
+                    "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
             }
 
             /*button to edit the items - should trigger a modal*/
@@ -352,8 +362,13 @@ $(document).on("click", ".updateBtn", function(event){
 });
 
 //handle deleting items
-$('#itemDelete').click(function(){
-    console.log("deleting item");
+//$('.itemDelete').click(function(){
+$(document).on("click", ".itemDelete", function(event){
+        console.log("deleting item");
+    //$(".updateBtn").on('click', function(event){
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        console.log("here");
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
