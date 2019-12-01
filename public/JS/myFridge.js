@@ -104,7 +104,7 @@ $(document).ready(function(){
             //let today = new Date();
             var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
             usaTime = new Date(usaTime);
-            console.log('USA time: '+usaTime.toLocaleString())
+            //console.log('USA time: '+usaTime.toLocaleString())
             // let dd = String(today.getDate()).padStart(2, '0');
             // let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             // let yyyy = today.getFullYear();
@@ -113,14 +113,14 @@ $(document).ready(function(){
             let yyyy = usaTime.getFullYear();
 
             today = mm + '/' + dd + '/' + yyyy;
-            console.log(today);
+            //console.log(today);
             if(var3 != null){
-                console.log("hello?");
+                //console.log("hello?");
                 if(yyyy - date1.getFullYear() < 0){
                     //ok - expires later year
                     console.log("expires next year");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
-                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         "</button></td></tr>");
                     // $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
@@ -130,7 +130,7 @@ $(document).ready(function(){
                     console.log("expires in a later month");
                     //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
-                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         "</button></td></tr>");
                 }
@@ -139,7 +139,7 @@ $(document).ready(function(){
                     console.log("expires later this month")
                     //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" + 
-                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         "</button></td></tr>");
                 }
@@ -147,7 +147,7 @@ $(document).ready(function(){
                     console.log("expires soon");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + 
                         dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "EXPIRES SOON" + "</td>" +
-                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         "</button></td></tr>");
                    // $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
@@ -168,7 +168,7 @@ $(document).ready(function(){
                     //$("#fridgeTableBody").append("<td id='expCell'>" + "EXPIRED" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
                         "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" + 
-                        "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                        "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         "</button></td></tr>");
                 }
@@ -177,7 +177,7 @@ $(document).ready(function(){
                 //$("#fridgeTableBody").append("<td id='almostExp'>" + "CAREFUL" + "</td>");
                 $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
                     "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" + 
-                    "<td><button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+                    "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                     "Edit" +
                     "</button></td></tr>");
             }
@@ -212,6 +212,44 @@ $(document).ready(function(){
     }).fail(function(jqXHR) {
         $("#error").html("The fridge items could not be accessed from the database.");
     });
+});
+
+let oldItemData = [];
+
+
+$(document).on("click", ".prepareData", function(event){
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    console.log("here");
+    //let $trigger = $(e.relatedTarget);
+    //console.log(e.relatedTarget);
+    //$(e.relatedTarget).data('button');
+    //let $row = $(this).closest("tr");
+    var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
+    $tds = $row.find("td");             // Finds all children <td> elements
+
+    //let oldItemData = []
+
+    $.each($tds, function() {               // Visits every single <td> element
+        console.log($(this).text());        // Prints out the text within the <td>
+        oldItemData.push($(this).text());
+    });
+    console.log($tds);
+    console.log(oldItemData);
+    //get jwt token from sessionStorage
+    // let token = sessionStorage.getItem('token');
+
+    // //recreate item from table
+    // let oldItem = {
+    // //    name: $('input[name = "itemName"]').val(),
+    // //    expDate: $('input[name = "expDate"]').val(),
+    // //    purchaseDate: $('input[name = "purchaseDate"]').val(),
+    // //    quantity: $('input[name = "quantity"]').val()
+    //     name: oldItemData[0],
+    //     expDate: oldItemData[1],
+    //     purchaseDate: oldItemData[2],
+    //     quantity: oldItemData[3]
+    // };
 });
 
 $("#itemConfirm").click(function() {   
@@ -258,6 +296,7 @@ $("#itemConfirm").click(function() {
 // $(".updateBtn").click(function() {  
 //     console.log("you pressed the update button for the first time"); 
 $(document).on("click", ".updateBtn", function(event){
+    console.log("updating item");
 //$(".updateBtn").on('click', function(event){
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -266,13 +305,17 @@ $(document).on("click", ".updateBtn", function(event){
     //console.log(e.relatedTarget);
     //$(e.relatedTarget).data('button');
     //let $row = $(this).closest("tr");
-    var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
-    $tds = $row.find("td");             // Finds all children <td> elements
+    // var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
+    // $tds = $row.find("td");             // Finds all children <td> elements
 
-    $.each($tds, function() {               // Visits every single <td> element
-        console.log($(this).text());        // Prints out the text within the <td>
-    });
-    console.log($tds);
+    // //let oldItemData = []
+
+    // $.each($tds, function() {               // Visits every single <td> element
+    //     console.log($(this).text());        // Prints out the text within the <td>
+    //     oldItemData.push($(this).text());
+    // });
+    // console.log($tds);
+    console.log(oldItemData);
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
@@ -282,6 +325,10 @@ $(document).on("click", ".updateBtn", function(event){
     //    expDate: $('input[name = "expDate"]').val(),
     //    purchaseDate: $('input[name = "purchaseDate"]').val(),
     //    quantity: $('input[name = "quantity"]').val()
+        name: oldItemData[0],
+        expDate: oldItemData[1],
+        purchaseDate: oldItemData[2],
+        quantity: oldItemData[3]
     };
 
     let newItem = {
@@ -306,7 +353,7 @@ $(document).on("click", ".updateBtn", function(event){
 
 //handle deleting items
 $('#itemDelete').click(function(){
-
+    console.log("deleting item");
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
