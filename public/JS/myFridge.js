@@ -224,42 +224,18 @@ $(document).ready(function(){
     });
 });
 
-let oldItemData = [];
-
+oldItemData = [];
 
 $(document).on("click", ".prepareData", function(event){
     event.stopPropagation();
     event.stopImmediatePropagation();
-    console.log("here");
-    //let $trigger = $(e.relatedTarget);
-    //console.log(e.relatedTarget);
-    //$(e.relatedTarget).data('button');
-    //let $row = $(this).closest("tr");
+
     var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
     $tds = $row.find("td");             // Finds all children <td> elements
 
-    oldItemData = [];
-
     $.each($tds, function() {               // Visits every single <td> element
-        console.log($(this).text());        // Prints out the text within the <td>
         oldItemData.push($(this).text());
     });
-    console.log($tds);
-    console.log(oldItemData);
-    //get jwt token from sessionStorage
-    // let token = sessionStorage.getItem('token');
-
-    // //recreate item from table
-    // let oldItem = {
-    // //    name: $('input[name = "itemName"]').val(),
-    // //    expDate: $('input[name = "expDate"]').val(),
-    // //    purchaseDate: $('input[name = "purchaseDate"]').val(),
-    // //    quantity: $('input[name = "quantity"]').val()
-    //     name: oldItemData[0],
-    //     expDate: oldItemData[1],
-    //     purchaseDate: oldItemData[2],
-    //     quantity: oldItemData[3]
-    // };
 });
 
 $("#itemConfirm").click(function() {   
@@ -303,38 +279,15 @@ $("#itemConfirm").click(function() {
 
 
 //handle updating items
-// $(".updateBtn").click(function() {  
-//     console.log("you pressed the update button for the first time"); 
 $(document).on("click", ".updateBtn", function(event){
-    console.log("updating item");
-//$(".updateBtn").on('click', function(event){
     event.stopPropagation();
     event.stopImmediatePropagation();
-    console.log("here");
-    //let $trigger = $(e.relatedTarget);
-    //console.log(e.relatedTarget);
-    //$(e.relatedTarget).data('button');
-    //let $row = $(this).closest("tr");
-    // var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
-    // $tds = $row.find("td");             // Finds all children <td> elements
 
-    // //let oldItemData = []
-
-    // $.each($tds, function() {               // Visits every single <td> element
-    //     console.log($(this).text());        // Prints out the text within the <td>
-    //     oldItemData.push($(this).text());
-    // });
-    // console.log($tds);
-    console.log(oldItemData);
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
     //recreate item from table
     let oldItem = {
-    //    name: $('input[name = "itemName"]').val(),
-    //    expDate: $('input[name = "expDate"]').val(),
-    //    purchaseDate: $('input[name = "purchaseDate"]').val(),
-    //    quantity: $('input[name = "quantity"]').val()
         name: oldItemData[0],
         expDate: oldItemData[1],
         purchaseDate: oldItemData[2],
@@ -342,10 +295,10 @@ $(document).on("click", ".updateBtn", function(event){
     };
 
     let newItem = {
-        name: $('input[name = "itemName"]').val(),
-        expDate: $('input[name = "expDate"]').val(),
-        purchaseDate: $('input[name = "purchaseDate"]').val(),
-        quantity: $('input[name = "quantity"]').val()
+        name: $('input[name="editItemName"]').val(),
+        expDate: $('input[name = "editExpDate"]').val(),
+        purchaseDate: $('input[name = "editPurchaseDate"]').val(),
+        quantity: $('input[name = "editQuantity"]').val()
     };
 
     // POST a request with the JSON-encoded song to the Server API
@@ -354,8 +307,7 @@ $(document).on("click", ".updateBtn", function(event){
         url: "http://localhost:3000/api/updateItem",
         data: {token: token, oldItem: oldItem, newItem: newItem, location: 'fridge'}
     }).done(function(data) {
-        // Reset the form after saving the song
-        $("form").trigger("reset");
+        //something
     }).fail(function(jqXHR) {
         $("#error").html("The item could not be added.");
     });
@@ -364,20 +316,24 @@ $(document).on("click", ".updateBtn", function(event){
 //handle deleting items
 //$('.itemDelete').click(function(){
 $(document).on("click", ".itemDelete", function(event){
-        console.log("deleting item");
-    //$(".updateBtn").on('click', function(event){
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        console.log("here");
-    //get jwt token from sessionStorage
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    let $row = $(this).closest("tr"),       // Finds the closest row <tr> 
+    $tds = $row.find("td");             // Finds all children <td> elements
+
+    $.each($tds, function() {               // Visits every single <td> element
+        oldItemData.push($(this).text());
+    });
+
     let token = sessionStorage.getItem('token');
 
     //recreate item from table
     let item = {
-    //    name: $('input[name = "itemName"]').val(),
-    //    expDate: $('input[name = "expDate"]').val(),
-    //    purchaseDate: $('input[name = "purchaseDate"]').val(),
-    //    quantity: $('input[name = "quantity"]').val()
+        name: oldItemData[0],
+        expDate: oldItemData[1],
+        purchaseDate: oldItemData[2],
+        quantity: oldItemData[3]
     };
 
     $.ajax({

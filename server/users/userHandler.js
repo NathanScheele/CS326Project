@@ -128,10 +128,18 @@ module.exports = {
       } 
       else {
         if(loc == "fridge"){
-          user.fridge.splice(user.fridge.indexOf(item), 1);
+          for(let i = 0; i < user.fridge.length; i++){
+            if(user.fridge[i].name == item.name && user.fridge[i].quantity == item.quantity){
+              user.fridge.splice(i, 1);
+            }
+          }
         }
         else{
-          user.freezer.splice(user.fridge.indexOf(item), 1);
+          for(let i = 0; i < user.freezer.length; i++){
+            if(user.freezer[i].name == item.name && user.freezer[i].quantity == item.quantity){
+              user.freezer.splice(i, 1);
+            }
+          }
         }
 
         user.save(function (err, user) {
@@ -154,7 +162,6 @@ module.exports = {
     let loc = req.body.location;
     let oldItem = req.body.oldItem;
     let newItem = req.body.newItem;
-
     const decoded = jwt.decode(token, secret);
 
     User.findById(decoded.id, function(err, user) {
@@ -164,10 +171,18 @@ module.exports = {
       } 
       else {
         if(loc == "fridge"){
-          user.fridge[user.fridge.indexOf(oldItem)] = newItem;
+          for(let i = 0; i < user.fridge.length; i++){
+            if(user.fridge[i].name == oldItem.name && user.fridge[i].quantity == oldItem.quantity){
+              user.fridge[i] = newItem;
+            }
+          }
         }
         else{
-          user.freezer[user.freezer.indexOf(oldItem)] = newItem;
+          for(let i = 0; i < user.freezer.length; i++){
+            if(user.freezer[i].name == oldItem.name && user.freezer[i].quantity == oldItem.quantity){
+              user.freezer[i] = newItem;
+            }
+          }
         }
 
         user.save(function (err, user) {
