@@ -238,7 +238,7 @@ $(document).on("click", ".prepareData", function(event){
     var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
     $tds = $row.find("td");             // Finds all children <td> elements
 
-    //let oldItemData = []
+    oldItemData = [];
 
     $.each($tds, function() {               // Visits every single <td> element
         console.log($(this).text());        // Prints out the text within the <td>
