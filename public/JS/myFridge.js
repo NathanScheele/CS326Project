@@ -22,6 +22,7 @@ propSort = function(array,prop, prop2, desc) {
 //https://www.codeproject.com/Questions/1075115/How-Do-I-Sort-My-Json-Data-Based-On-Date-Column
 
 
+/*this function adjusts for time zones */
 function ConvertUTCTimeToLocalTime(UTCDateString)
     {
         var convertdLocalTime = new Date(UTCDateString);
@@ -364,6 +365,8 @@ $(document).on("click", ".itemDelete", function(event){
     }).done(function(data) {
         // Reset the form after saving the song
         $("form").trigger("reset");
+        //or, refresh the page. 
+        location = location;
     }).fail(function(jqXHR) {
         $("#error").html("The item could not be added.");
     });
