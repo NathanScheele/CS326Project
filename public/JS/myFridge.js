@@ -22,6 +22,20 @@ propSort = function(array,prop, prop2, desc) {
 //https://www.codeproject.com/Questions/1075115/How-Do-I-Sort-My-Json-Data-Based-On-Date-Column
 
 
+function ConvertUTCTimeToLocalTime(UTCDateString)
+    {
+        var convertdLocalTime = new Date(UTCDateString);
+
+        var hourOffset = convertdLocalTime.getTimezoneOffset() / 60;
+
+        convertdLocalTime.setHours( convertdLocalTime.getHours() + hourOffset ); 
+
+        return convertdLocalTime;
+    }
+
+    // https://stackoverflow.com/questions/6525538/convert-utc-date-time-to-local-date-time
+
+
 //get all of the data for the fridge when you open the page
 $(document).ready(function(){
     //get jwt token from sessionStorage
@@ -71,8 +85,13 @@ $(document).ready(function(){
             let var2 = currentObject.name;
             
             let var3 = currentObject.expDate;
+            console.log("var3" + var3);
 
             let date1 = new Date(var3);
+            console.log(date1);
+            date1 = ConvertUTCTimeToLocalTime(date1);
+            console.log(date1);
+
             let correctMonth1 = date1.getMonth() + 1
             let dateString1 = correctMonth1 + "/" + date1.getDate() + "/" + date1.getFullYear();
             //credit: https://stackoverflow.com/questions/20841466/how-to-convert-json-date-format-to-normal-date-format-ex-date1388412591038
@@ -85,6 +104,7 @@ $(document).ready(function(){
             
             
             let date2 = new Date(var4);
+            date2 = ConvertUTCTimeToLocalTime(date2);
             let correctMonth2 = date2.getMonth() + 1
             let dateString2 = correctMonth2  + "/" + date2.getDate() + "/" + date2.getFullYear();
             // console.log("var4: " + var4);
@@ -113,7 +133,7 @@ $(document).ready(function(){
             let yyyy = usaTime.getFullYear();
 
             today = mm + '/' + dd + '/' + yyyy;
-            //console.log(today);
+            console.log("today: " + today);
             if(var3 != null){
                 //console.log("hello?");
                 if(yyyy - date1.getFullYear() < 0){
@@ -172,6 +192,7 @@ $(document).ready(function(){
                 }
                 else{
                     //expired
+                    console.log(date1);
                     console.log("expiration date passed already.");
                     //$("#fridgeTableBody").append("<td id='expCell'>" + "EXPIRED" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
