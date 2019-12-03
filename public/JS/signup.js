@@ -1,4 +1,4 @@
-$("button[name='confirm']").click(function(event) {   
+$("button[name='signup']").click(function(event) {   
 
     if (document.getElementById("formErrors2").value === "verified"){
 
