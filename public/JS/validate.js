@@ -87,3 +87,4 @@ function validateAddItem(event){
     //clear form errors
 
  login.addEventListener("click", validateLoginForm);
+ 

@@ -3,7 +3,7 @@ const jwt = require('jwt-simple');
 const passwordHash = require('password-hash');
 const https = require('https');
 
-const secret = process.env.JWT_SECRET
+const secret = "986A875942742E05EC5E622D9F915C7EE1ED00D100A6B2D60B855F9D60A7ADCC";
 
 module.exports = {
 
