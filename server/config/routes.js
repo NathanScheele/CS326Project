@@ -29,4 +29,7 @@ module.exports = function(app, express){
   app.put('/api/removeItem', userHandler.removeItem);
   app.get('/api/getItems', userHandler.getItems);
   app.get('/api/getRecipes', userHandler.getRecipes);
+  app.put('/api/updateItem', userHandler.updateItem);
+  // Add headers
+
 };

@@ -129,10 +129,61 @@ module.exports = {
       } 
       else {
         if(loc == "fridge"){
-          user.fridge.splice(user.fridge.indexOf(item), 1);
+          for(let i = 0; i < user.fridge.length; i++){
+            if(user.fridge[i].name == item.name && user.fridge[i].quantity == item.quantity){
+              user.fridge.splice(i, 1);
+            }
+          }
         }
         else{
-          user.freezer.splice(user.fridge.indexOf(item), 1);
+          for(let i = 0; i < user.freezer.length; i++){
+            if(user.freezer[i].name == item.name && user.freezer[i].quantity == item.quantity){
+              user.freezer.splice(i, 1);
+            }
+          }
+        }
+
+        user.save(function (err, user) {
+          if(err){
+            console.log("ERROR: unable to update")
+            res.status(500).send("Error: unable to update")
+          }
+          else{
+            console.log("Update successful");
+            res.status(200).send("Update successful")
+          }
+        });
+      }
+   });
+  },
+
+  //req should be in the form of {token: <jwt token form local storage>, location: <"fridge" or "freezer">, item: <food item to removed>}
+  updateItem: function(req, res){
+    let token = req.body.token;
+    let loc = req.body.location;
+    let oldItem = req.body.oldItem;
+    let newItem = req.body.newItem;
+    const decoded = jwt.decode(token, secret);
+
+    User.findById(decoded.id, function(err, user) {
+      if (err) { //throws errow if something goes wrong when contacting the database
+        console.log("mongo err: ", err);
+        res.status(500).send(err);
+      } 
+      else {
+        if(loc == "fridge"){
+          for(let i = 0; i < user.fridge.length; i++){
+            if(user.fridge[i].name == oldItem.name && user.fridge[i].quantity == oldItem.quantity){
+              user.fridge[i] = newItem;
+            }
+          }
+        }
+        else{
+          for(let i = 0; i < user.freezer.length; i++){
+            if(user.freezer[i].name == oldItem.name && user.freezer[i].quantity == oldItem.quantity){
+              user.freezer[i] = newItem;
+            }
+          }
         }
 
         user.save(function (err, user) {

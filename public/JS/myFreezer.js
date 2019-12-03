@@ -39,8 +39,6 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
 //get all of the data for the fridge when you open the page
 $(document).ready(function(){
-
-
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
@@ -48,7 +46,7 @@ $(document).ready(function(){
     $.ajax({
         type: "GET",
         url: "http://localhost:3000/api/getItems",
-        data: {"token": token, "location": 'fridge'}
+        data: {"token": token, "location": 'freezer'}
     }).done(function(data) {
         //console.log(data);
         // edit html
@@ -244,7 +242,7 @@ $(document).ready(function(){
         }
 
     }).fail(function(jqXHR) {
-        $("#error").html("The fridge items could not be accessed from the database.");
+        $("#error").html("The freezer items could not be accessed from the database.");
     });
 });
 
@@ -279,7 +277,7 @@ $("#itemConfirm").click(function() {
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/addItem",
-        data: {token: token, item: item, location: 'fridge'}
+        data: {token: token, item: item, location: 'freezer'}
     }).done(function(data) {
         // Reset the form after saving the song
         $("form").trigger("reset");
@@ -301,13 +299,6 @@ $("#itemConfirm").click(function() {
 //     });
 // });
 
-$("#getRecipes").click(function() { 
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:3000/api/getRecipes",
-        data: {ingredients: ['chicken', 'rice']}
-    }).done(function(data) {
-        console.log(data);
 
 //handle updating items
 $(document).on("click", ".updateBtn", function(event){
@@ -336,7 +327,7 @@ $(document).on("click", ".updateBtn", function(event){
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/updateItem",
-        data: {token: token, oldItem: oldItem, newItem: newItem, location: 'fridge'}
+        data: {token: token, oldItem: oldItem, newItem: newItem, location: 'freezer'}
     }).done(function(data) {
         //something
     }).fail(function(jqXHR) {
@@ -370,7 +361,7 @@ $(document).on("click", ".itemDelete", function(event){
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/removeItem",
-        data: {token: token, item: item, location: 'fridge'}
+        data: {token: token, item: item, location: 'freezer'}
     }).done(function(data) {
         // Reset the form after saving the song
         $("form").trigger("reset");
