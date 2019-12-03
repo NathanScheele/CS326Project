@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 let port = 3000;
 
 // connect db
-mongoose.connect(process.env.FRIDGE_MONGODB_URI, 
+mongoose.connect("mongodb+srv://user:password1234@whatsinmyfridge-7whlg.mongodb.net/test?retryWrites=true&w=majority", 
 {
     useUnifiedTopology: true,
     useNewUrlParser: true

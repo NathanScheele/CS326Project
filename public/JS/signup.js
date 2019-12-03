@@ -1,4 +1,6 @@
-$("#signup").click(function() {   
+$("button[name='confirm']").click(function(event) {   
+
+    if (document.getElementById("formErrors2").value === "verified"){
 
     // Create a credential object from the form fields
     let credentials = {
@@ -18,4 +20,5 @@ $("#signup").click(function() {
     }).fail(function(jqXHR) {
         $("#error").html("The user could not be registered.");
     });
+}
 });
