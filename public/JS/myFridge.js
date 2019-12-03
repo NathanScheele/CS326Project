@@ -1,17 +1,17 @@
-propSort = function(array,prop, prop2, desc) {
-    array.sort(function(a, b) {
+propSort = function (array, prop, prop2, desc) {
+    array.sort(function (a, b) {
         if (a[prop] == null && b[prop] != null)
             return -1;
         if (a[prop] != null && b[prop] == null)
             return 1;
-        if (a[prop] == null && b[prop] == null){
+        if (a[prop] == null && b[prop] == null) {
 
             if (a[prop2] < b[prop2])
                 return desc ? 1 : -1;
             if (a[prop2] > b[prop2])
                 return desc ? -1 : 1;
         }
-           
+
         if (a[prop] < b[prop])
             return desc ? 1 : -1;
         if (a[prop] > b[prop])
@@ -23,22 +23,23 @@ propSort = function(array,prop, prop2, desc) {
 
 
 /*this function adjusts for time zones */
-function ConvertUTCTimeToLocalTime(UTCDateString)
-    {
-        var convertdLocalTime = new Date(UTCDateString);
+function ConvertUTCTimeToLocalTime(UTCDateString) {
+    var convertdLocalTime = new Date(UTCDateString);
 
-        var hourOffset = convertdLocalTime.getTimezoneOffset() / 60;
+    var hourOffset = convertdLocalTime.getTimezoneOffset() / 60;
 
-        convertdLocalTime.setHours( convertdLocalTime.getHours() + hourOffset ); 
+    convertdLocalTime.setHours(convertdLocalTime.getHours() + hourOffset);
 
-        return convertdLocalTime;
-    }
+    return convertdLocalTime;
+}
 
-    // https://stackoverflow.com/questions/6525538/convert-utc-date-time-to-local-date-time
+// https://stackoverflow.com/questions/6525538/convert-utc-date-time-to-local-date-time
 
 
 //get all of the data for the fridge when you open the page
-$(document).ready(function(){
+$(document).ready(function () {
+
+
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
@@ -46,8 +47,8 @@ $(document).ready(function(){
     $.ajax({
         type: "GET",
         url: "http://localhost:3000/api/getItems",
-        data: {"token": token, "location": 'fridge'}
-    }).done(function(data) {
+        data: { "token": token, "location": 'fridge' }
+    }).done(function (data) {
         //console.log(data);
         // edit html
         //console.log(typeof(data));
@@ -66,7 +67,7 @@ $(document).ready(function(){
 
 
 
-        for(let i = 0; i < itemArray.length; i++){
+        for (let i = 0; i < itemArray.length; i++) {
             //let currentObject = Object.entries(data[i]);
             let currentObject = itemArray[i][1];
             console.log(currentObject);
@@ -76,15 +77,15 @@ $(document).ready(function(){
             //console.log(currentObject[0]);
             //console.log(currentObject[1]);
             //console.log(currentObject[2]);
-            
+
             // let var1 = currentObject[0][1]; //this is just the id
             // let var2 = currentObject[1][1];
-            
+
             // let var3 = currentObject[2][1];
 
             let var1 = currentObject.id; //this is just the id
             let var2 = currentObject.name;
-            
+
             let var3 = currentObject.expDate;
             console.log("var3" + var3);
 
@@ -102,12 +103,12 @@ $(document).ready(function(){
             // console.log("dateString1: " + dateString1);
             //let var4 = currentObject[3][1];
             let var4 = currentObject.purchaseDate;
-            
-            
+
+
             let date2 = new Date(var4);
             date2 = ConvertUTCTimeToLocalTime(date2);
             let correctMonth2 = date2.getMonth() + 1
-            let dateString2 = correctMonth2  + "/" + date2.getDate() + "/" + date2.getFullYear();
+            let dateString2 = correctMonth2 + "/" + date2.getDate() + "/" + date2.getFullYear();
             // console.log("var4: " + var4);
             // console.log("date2: " + date2);
             // console.log("dateString2: " + dateString2);
@@ -123,21 +124,21 @@ $(document).ready(function(){
             // $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td></tr>");
 
             //let today = new Date();
-            var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+            var usaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
             usaTime = new Date(usaTime);
             //console.log('USA time: '+usaTime.toLocaleString())
             // let dd = String(today.getDate()).padStart(2, '0');
             // let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             // let yyyy = today.getFullYear();
             let dd = usaTime.getDate();
-            let mm = usaTime.getMonth()+1;
+            let mm = usaTime.getMonth() + 1;
             let yyyy = usaTime.getFullYear();
 
             today = mm + '/' + dd + '/' + yyyy;
             console.log("today: " + today);
-            if(var3 != null){
+            if (var3 != null) {
                 //console.log("hello?");
-                if(yyyy - date1.getFullYear() < 0){
+                if (yyyy - date1.getFullYear() < 0) {
                     //ok - expires later year
                     console.log("expires next year");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
@@ -145,10 +146,10 @@ $(document).ready(function(){
                         "Edit" +
                         //"</button></td></tr>");
                         "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
+                        "</tr>");
                     // $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                 }
-                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) < 0) {
+                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) < 0) {
                     //ok - expires later month
                     console.log("expires in a later month");
                     //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
@@ -157,29 +158,29 @@ $(document).ready(function(){
                         "Edit" +
                         //"</button></td></tr>");
                         "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
+                        "</tr>");
                 }
-                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() < -2){
+                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) == 0 && dd - date1.getDate() < -2) {
                     //ok - expires later this month
                     console.log("expires later this month")
                     //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
-                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" + 
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         //"</button></td></tr>");
                         "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
+                        "</tr>");
                 }
-                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth()+1) == 0 && dd - date1.getDate() <= 0){
+                else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) == 0 && dd - date1.getDate() <= 0) {
                     console.log("expires soon");
-                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + 
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" +
                         dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "EXPIRES SOON" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         //"</button></td></tr>");
                         "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
-                   // $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
+                        "</tr>");
+                    // $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
                     // $("#fridgeTableBody").append("<div class='container'>" +
                     //     "<div class='row'>" +
                     //         "<div class='col'>" +
@@ -191,24 +192,24 @@ $(document).ready(function(){
                     //     "</div>" +
                     // "</div>" );
                 }
-                else{
+                else {
                     //expired
                     console.log(date1);
                     console.log("expiration date passed already.");
                     //$("#fridgeTableBody").append("<td id='expCell'>" + "EXPIRED" + "</td>");
-                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
-                        "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" + 
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 +
+                        "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                         "Edit" +
                         // "</button></td></tr>");
                         "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
+                        "</tr>");
                 }
             }
-            else{
+            else {
                 //$("#fridgeTableBody").append("<td id='almostExp'>" + "CAREFUL" + "</td>");
-                $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
-                    "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" + 
+                $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 +
+                    "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" +
                     "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                     "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
                     "</tr>");
@@ -223,7 +224,7 @@ $(document).ready(function(){
             // $("#fridgeTableBody").append("<button type='button' class='btn btn-danger' style='height:100%'>" +
             //                " &times;" +
             //              "</button>");
-            
+
             //******************************************* *
             //Use this to add a form inside the td. - might want to edit the Edit button above to open a form instead
             //********************************************* */
@@ -234,54 +235,54 @@ $(document).ready(function(){
             //         "<label for='quantity'>Eat how many: </label>" +
             //         "<input type='text' id='quantity'>" +
             //     "</div>" +
-            
+
             //     "<input type='button' id='updateBtn' value='Update'>" +
 
             //     "<div id='error'></div>" +
             // "</form> </td>");
         }
 
-    }).fail(function(jqXHR) {
+    }).fail(function (jqXHR) {
         $("#error").html("The fridge items could not be accessed from the database.");
     });
 });
 
 oldItemData = [];
 
-$(document).on("click", ".prepareData", function(event){
+$(document).on("click", ".prepareData", function (event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
     var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
-    $tds = $row.find("td");             // Finds all children <td> elements
+        $tds = $row.find("td");             // Finds all children <td> elements
 
-    $.each($tds, function() {               // Visits every single <td> element
+    $.each($tds, function () {               // Visits every single <td> element
         oldItemData.push($(this).text());
     });
 });
 
-$("#itemConfirm").click(function() {   
+$("#itemConfirm").click(function () {
 
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
     // Create a credential object from the form fields
     let item = {
-       name: $('input[name = "itemName"]').val(),
-       expDate: $('input[name = "expDate"]').val(),
-       purchaseDate: $('input[name = "purchaseDate"]').val(),
-       quantity: $('input[name = "quantity"]').val()
+        name: $('input[name = "itemName"]').val(),
+        expDate: $('input[name = "expDate"]').val(),
+        purchaseDate: $('input[name = "purchaseDate"]').val(),
+        quantity: $('input[name = "quantity"]').val()
     };
 
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/addItem",
-        data: {token: token, item: item, location: 'fridge'}
-    }).done(function(data) {
+        data: { token: token, item: item, location: 'fridge' }
+    }).done(function (data) {
         // Reset the form after saving the song
         $("form").trigger("reset");
-    }).fail(function(jqXHR) {
+    }).fail(function (jqXHR) {
         $("#error").html("The item could not be added.");
     });
 });
@@ -299,9 +300,17 @@ $("#itemConfirm").click(function() {
 //     });
 // });
 
-
+$("#getRecipes").click(function () {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/api/getRecipes",
+        data: { ingredients: ['chicken', 'rice'] }
+    }).done(function (data) {
+        console.log(data);
+    });
+});
 //handle updating items
-$(document).on("click", ".updateBtn", function(event){
+$(document).on("click", ".updateBtn", function (event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
@@ -327,24 +336,24 @@ $(document).on("click", ".updateBtn", function(event){
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/updateItem",
-        data: {token: token, oldItem: oldItem, newItem: newItem, location: 'fridge'}
-    }).done(function(data) {
+        data: { token: token, oldItem: oldItem, newItem: newItem, location: 'fridge' }
+    }).done(function (data) {
         //something
-    }).fail(function(jqXHR) {
+    }).fail(function (jqXHR) {
         $("#error").html("The item could not be added.");
     });
 });
 
 //handle deleting items
 //$('.itemDelete').click(function(){
-$(document).on("click", ".itemDelete", function(event){
+$(document).on("click", ".itemDelete", function (event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
     let $row = $(this).closest("tr"),       // Finds the closest row <tr> 
-    $tds = $row.find("td");             // Finds all children <td> elements
+        $tds = $row.find("td");             // Finds all children <td> elements
 
-    $.each($tds, function() {               // Visits every single <td> element
+    $.each($tds, function () {               // Visits every single <td> element
         oldItemData.push($(this).text());
     });
 
@@ -361,13 +370,13 @@ $(document).on("click", ".itemDelete", function(event){
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/removeItem",
-        data: {token: token, item: item, location: 'fridge'}
-    }).done(function(data) {
+        data: { token: token, item: item, location: 'fridge' }
+    }).done(function (data) {
         // Reset the form after saving the song
         $("form").trigger("reset");
         //or, refresh the page. 
         location = location;
-    }).fail(function(jqXHR) {
+    }).fail(function (jqXHR) {
         $("#error").html("The item could not be added.");
     });
 });

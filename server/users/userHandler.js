@@ -1,6 +1,7 @@
 const User = require('./userModel.js');
 const jwt = require('jwt-simple');
 const passwordHash = require('password-hash');
+const https = require('https');
 
 const secret = process.env.JWT_SECRET
 
@@ -221,6 +222,60 @@ module.exports = {
           res.status(200).json({freezer: user.freezer, fridge: user.fridge});
         }
       }
+    });
+  },
+
+  getRecipes: function(req, res){
+    const apiKey = process.env.SPOONACULAR_API_KEY;
+    let ingredients = req.query.ingredients;
+
+    let uri = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredients[0]}`;
+
+    for(let i = 1; i < ingredients.length; i++){
+      uri += `,+${ingredients[i]}`;
+    }
+
+    let recipes = [];
+
+    let data = '';
+
+    https.get(uri, (response) => {
+
+      response.on('data', (d) => {
+        data += d;
+      });
+
+      response.on('end', () =>{
+        data = JSON.parse(data);
+        ids = [];
+
+        for(let i = 0; i < data.length; i++){
+          ids.push(data[i].id);
+        }
+
+        for(let i = 0; i < ids.length; i++){
+          let uri = `https://api.spoonacular.com/recipes/${ids[i]}/information?apiKey=${apiKey}&includeNutrition=false`;
+          
+          let recipe = '';
+
+          https.get(uri, (response) => {
+            response.on('data', (d) => {
+              recipe += d;
+            });
+
+            response.on('end', () => {
+              recipe = JSON.parse(recipe);
+              recipes.push(recipe.sourceUrl);
+              if(recipes.length == ids.length){
+                res.status(200).json({recipes: recipes});
+              }
+            })
+          })
+        }
+      })
+
+    }).on('error', (e) => {
+      console.error(e);
     });
   }
 };
