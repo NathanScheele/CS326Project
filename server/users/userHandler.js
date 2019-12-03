@@ -266,12 +266,12 @@ module.exports = {
             response.on('end', () => {
               recipe = JSON.parse(recipe);
               recipes.push(recipe.sourceUrl);
-              console.log(recipes);
+              if(recipes.length == ids.length){
+                res.status(200).json({recipes: recipes});
+              }
             })
           })
         }
-        console.log(recipes);
-        res.status(200).json({recipes: recipes});
       })
 
     }).on('error', (e) => {
