@@ -3,6 +3,7 @@ let signup = document.querySelector("button[name='signup']");
 function validateSignupForm(event) {
     let userName = document.getElementById("signupForm-username");
     let password = document.getElementById("signupForm-password");
+    let confirm = document.getElementById("signupForm-passwordc");
     let ul = document.getElementById("formErrors2");
     let shouldIStop = 0;
     ul.innerHTML = "";
@@ -30,7 +31,17 @@ function validateSignupForm(event) {
             shouldIStop = 1;
         }
         
-}else if(userName.value.length < 6){
+}
+else if(password.value != confirm.value){
+    console.log("passwords do not match");
+    var errMsg4 = document.createElement("li");
+    password.style.backgroundColor = "Orange";
+    confirm.style.backgroundColor = "Orange";
+    errMsg4.appendChild(document.createTextNode("Passwords do not match"));
+    ul.appendChild(errMsg4);
+    shouldIStop = 1;
+}
+else if(userName.value.length < 6){
         console.log("userName is invalid");
         var errMsg2 = document.createElement("li");
         userName.style.backgroundColor = "Orange";
