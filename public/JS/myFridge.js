@@ -49,15 +49,41 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "http://localhost:3000/api/getItems",
-        data: {"token": token, "location": 'fridge'}
-    }).done(function(data) {
+        data: { "token": token, "location": 'fridge' }
+    }).done(function (data) {
+        //console.log(data);
+        // edit html
+        //console.log(typeof(data));
+        //console.log(data[0]) //data[0] is the stuff we want
+        /*Object.entries(data).forEach(
+            //([key, value]) => console.log(key, value)
+            //([key, value]) => console.log(value("expDate"))
+            JSON.parse*/
+        //);
         let itemArray = Object.entries(data);
+        // console.log(itemArray);
+        // //sortBy(arr, (s) => -new Date(s));
+        // console.log(itemArray);
+        // propSort(itemArray, 'expDate', 'purchaseDate', true);
+        // console.log(itemArray);
+
 
 
         for (let i = 0; i < itemArray.length; i++) {
             //let currentObject = Object.entries(data[i]);
             let currentObject = itemArray[i][1];
             console.log(currentObject);
+            //data[i] refers to an object in the fridge
+            //currentObject is a key/value pair.
+            //$("#toCurrency").append( $('<option>'+allCurrencies[key]+" ("+key+')</option>').val(key));
+            //console.log(currentObject[0]);
+            //console.log(currentObject[1]);
+            //console.log(currentObject[2]);
+
+            // let var1 = currentObject[0][1]; //this is just the id
+            // let var2 = currentObject[1][1];
+
+            // let var3 = currentObject[2][1];
 
             let var1 = currentObject.id; //this is just the id
             let var2 = currentObject.name;
@@ -74,76 +100,118 @@ $(document).ready(function () {
             let dateString1 = correctMonth1 + "/" + date1.getDate() + "/" + date1.getFullYear();
             //credit: https://stackoverflow.com/questions/20841466/how-to-convert-json-date-format-to-normal-date-format-ex-date1388412591038
 
+            // console.log("var3: " + var3);
+            // console.log("date1: " + date1);
+            // console.log("dateString1: " + dateString1);
+            //let var4 = currentObject[3][1];
             let var4 = currentObject.purchaseDate;
 
 
             let date2 = new Date(var4);
             date2 = ConvertUTCTimeToLocalTime(date2);
             let correctMonth2 = date2.getMonth() + 1
-            let dateString2 = correctMonth2  + "/" + date2.getDate() + "/" + date2.getFullYear();
+            let dateString2 = correctMonth2 + "/" + date2.getDate() + "/" + date2.getFullYear();
+            // console.log("var4: " + var4);
+            // console.log("date2: " + date2);
+            // console.log("dateString2: " + dateString2);
 
-
+            //let var5 = currentObject[4][1];
             let var5 = currentObject.quantity;
-            var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+            // $("#fridgeTableBody").append("<tr id=" + var1 + ">");
+            // $("#fridgeTableBody").append("<td>" + var2 + "</td>");
+            // $("#fridgeTableBody").append("<td>" + dateString1 + "</td>");
+            // $("#fridgeTableBody").append("<td>" + dateString2 + "</td>");
+            // $("#fridgeTableBody").append("<td>" + var5 + "</td></tr>");
+
+            // $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td></tr>");
+
+            //let today = new Date();
+            var usaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
             usaTime = new Date(usaTime);
+            //console.log('USA time: '+usaTime.toLocaleString())
+            // let dd = String(today.getDate()).padStart(2, '0');
+            // let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            // let yyyy = today.getFullYear();
             let dd = usaTime.getDate();
             let mm = usaTime.getMonth() + 1;
             let yyyy = usaTime.getFullYear();
 
             today = mm + '/' + dd + '/' + yyyy;
             console.log("today: " + today);
-            if(var3 != null){
-                if(yyyy - date1.getFullYear() < 0){
+            if (var3 != null) {
+                //console.log("hello?");
+                if (yyyy - date1.getFullYear() < 0) {
                     //ok - expires later year
                     console.log("expires next year");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
-                        "Edit" +
-                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                        "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
+                    "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
+                    "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
                     "</tr>");
+                    // $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) < 0) {
                     //ok - expires later month
                     console.log("expires in a later month");
+                    //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
-                        "Edit" +
-                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
+                        "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
+                        "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
+                        "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
+                        "</tr>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) == 0 && dd - date1.getDate() < -2) {
                     //ok - expires later this month
                     console.log("expires later this month")
-                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" + 
+                    //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
-                        "Edit" +
-                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
+                        "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
+                        "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
+                        "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
+                        "</tr>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) == 0 && dd - date1.getDate() <= 0) {
                     console.log("expires soon");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" +
                         dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "EXPIRES SOON" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
-                        "Edit" +
-                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                        "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
+                    "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
+                    "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
                     "</tr>");
+                    // $("#fridgeTableBody").append("<td id='almostExp'>EXPIRES SOON!</td>");
+                    // $("#fridgeTableBody").append("<div class='container'>" +
+                    //     "<div class='row'>" +
+                    //         "<div class='col'>" +
+                    //             "<div class='alert alert-primary alert-dismissable fade show' role='alert'>" +
+                    //                 "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span></button>" +
+                    //                 "<h2 class='alert-heading'>Expires Soon!</h2> " +
+                    //             "</div>" +
+                    //         "</div>" +
+                    //     "</div>" +
+                    // "</div>" );
                 }
                 else {
                     //expired
                     console.log(date1);
                     console.log("expiration date passed already.");
-                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
-                        "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" + 
+                    //$("#fridgeTableBody").append("<td id='expCell'>" + "EXPIRED" + "</td>");
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 +
+                        "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
-                        "Edit" +
-                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
-                    "</tr>");
+                        "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
+                        "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
+                        "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
+                        "</tr>");
                 }
             }
-            else{
-                $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
-                    "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" + 
+            else {
+                //$("#fridgeTableBody").append("<td id='almostExp'>" + "CAREFUL" + "</td>");
+                $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 +
+                    "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" +
                     "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                     "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
                     "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
@@ -151,11 +219,31 @@ $(document).ready(function () {
                     "</tr>");
             }
 
-            
+            /*button to edit the items - should trigger a modal*/
+            // $("#fridgeTableBody").append("<button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
+            //                    "Edit" +
+            //                 "</button>");
+
+            /*button to remove items - should just call ajax to remove an item, so change the*/
+            // $("#fridgeTableBody").append("<button type='button' class='btn btn-danger' style='height:100%'>" +
+            //                " &times;" +
+            //              "</button>");
+
             //******************************************* *
             //Use this to add a form inside the td. - might want to edit the Edit button above to open a form instead
             //********************************************* */
-        
+            // $("#fridgeTableBody").append("<td>" +
+            // "<form>" + 
+            //     "<input type='hidden' id='removeForm'>" + 
+            //     "<div>" +
+            //         "<label for='quantity'>Eat how many: </label>" +
+            //         "<input type='text' id='quantity'>" +
+            //     "</div>" +
+
+            //     "<input type='button' id='updateBtn' value='Update'>" +
+
+            //     "<div id='error'></div>" +
+            // "</form> </td>");
         }
 
     }).fail(function (jqXHR) {
@@ -204,7 +292,18 @@ $("#itemConfirm").click(function () {
     });
 });
 
+// $('.modal').on('show.bs.modal', function (e) {
+//     let $trigger = $(e.relatedTarget);
+//     //console.log(e.relatedTarget);
+//     //$(e.relatedTarget).data('button');
+//     //let $row = $(this).closest("tr");
+//     var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
+//     $tds = $row.find("td");             // Finds all children <td> elements
 
+//     $.each($tds, function() {               // Visits every single <td> element
+//         console.log($(this).text());        // Prints out the text within the <td>
+//     });
+// });
 
 $("#getRecipes").click(function () {
 
@@ -242,13 +341,12 @@ $("#getRecipes").click(function () {
             console.log("not checked");
         }
     });
-
+    console.log(ingredients);
     $.ajax({
         type: "GET",
         url: "http://localhost:3000/api/getRecipes",
         data: { ingredients: ingredients }
     }).done(function (data) {
-        
         console.log(data);
         recipes = data.recipes;
 
@@ -297,7 +395,8 @@ $(document).on("click", ".updateBtn", function (event) {
 });
 
 //handle deleting items
-$(document).on("click", ".itemDelete", function(event){
+//$('.itemDelete').click(function(){
+$(document).on("click", ".itemDelete", function (event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
