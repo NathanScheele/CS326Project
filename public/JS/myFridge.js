@@ -327,20 +327,12 @@ $("#getRecipes").click(function () {
 
            let checkCell = cells[5];
            let $jCheckCell = $(checkCell);
-        //    let $checkCellChildren = $checkCell.find;
-        //    let $checkDiv = $checkCellChildren[2];
         console.log($jCheckCell);
            let $elements = $($jCheckCell.children());
            let $checkBox = $($elements[2]);
            console.log($checkBox);
-
-           //console.log($checkCell);
-           //console.log($checkCellChildren);
-           //console.log($checkDiv);
-        //   console.log($checkBox);
            let $checkInput = $($checkBox.children()[0]);
 
-        //    let $checkBox = $checkCell.check
         if ($checkInput.is(':checked')) {
             console.log("checked");
             ingredients.push(itemName);
@@ -348,10 +340,6 @@ $("#getRecipes").click(function () {
         else{
             console.log("not checked");
         }
-
-           //console.log($nameCell.innerHTML);
-           //console.log("Here is a TD: " + $cells.first().innerHTML);
-        //ingredients.push($(this).text());
     });
     console.log(ingredients);
     $.ajax({
@@ -360,6 +348,14 @@ $("#getRecipes").click(function () {
         data: { ingredients: ingredients }
     }).done(function (data) {
         console.log(data);
+        recipes = data.recipes;
+
+        for (let i = 0; i < recipes.length; i++) {
+            console.log(recipes[i]);
+            $("#recipeTableBody").append("<tr><td>" + recipes[i] + "</td>" +
+                        "</tr>");
+        }
+
     });
 });
 
