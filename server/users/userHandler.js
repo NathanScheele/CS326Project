@@ -277,5 +277,50 @@ module.exports = {
     }).on('error', (e) => {
       console.error(e);
     });
+  },
+
+  addRecipe: function(req, res){
+    let token = req.body.token;
+    let url = req.body.link;
+
+    const decoded = jwt.decode(token, secret);
+
+    User.findById(decoded.id, function(err, user) {
+      if (err) { //throws errow if something goes wrong when contacting the database
+        console.log("mongo err: ", err);
+        res.status(500).send(err);
+      } 
+      else {
+        user.recipes.push(url);
+
+        user.save(function (err, user) {
+          if(err){
+            console.log("ERROR: unable to update")
+            res.status(500).send("Error: unable to update")
+          }
+          else{
+            console.log("Update successful");
+            res.status(200).send("Update successful")
+          }
+        });
+      }
+   });
+
+  },
+
+  getSavedRecipes: function(req, res){
+    let token = req.query.token;
+
+    const decoded = jwt.decode(token, secret);
+
+    User.findById(decoded.id, function(err, user){
+      if(err){
+        console.log("Error: unable to contact database");
+        res.status(500).send("Error: unable to contact database");
+      }
+      else{
+        res.status(200).json(user.recipes);
+      }
+    });
   }
 };
