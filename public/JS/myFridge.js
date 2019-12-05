@@ -49,6 +49,7 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "http://localhost:3000/api/getItems",
+<<<<<<< Updated upstream
         data: { "token": token, "location": 'fridge' }
     }).done(function (data) {
         //console.log(data);
@@ -60,19 +61,18 @@ $(document).ready(function () {
             //([key, value]) => console.log(value("expDate"))
             JSON.parse*/
         //);
+=======
+        data: {"token": token, "location": 'fridge'}
+    }).done(function(data) {
+>>>>>>> Stashed changes
         let itemArray = Object.entries(data);
-        // console.log(itemArray);
-        // //sortBy(arr, (s) => -new Date(s));
-        // console.log(itemArray);
-        // propSort(itemArray, 'expDate', 'purchaseDate', true);
-        // console.log(itemArray);
-
 
 
         for (let i = 0; i < itemArray.length; i++) {
             //let currentObject = Object.entries(data[i]);
             let currentObject = itemArray[i][1];
             console.log(currentObject);
+<<<<<<< Updated upstream
             //data[i] refers to an object in the fridge
             //currentObject is a key/value pair.
             //$("#toCurrency").append( $('<option>'+allCurrencies[key]+" ("+key+')</option>').val(key));
@@ -84,6 +84,8 @@ $(document).ready(function () {
             // let var2 = currentObject[1][1];
 
             // let var3 = currentObject[2][1];
+=======
+>>>>>>> Stashed changes
 
             let var1 = currentObject.id; //this is just the id
             let var2 = currentObject.name;
@@ -100,16 +102,13 @@ $(document).ready(function () {
             let dateString1 = correctMonth1 + "/" + date1.getDate() + "/" + date1.getFullYear();
             //credit: https://stackoverflow.com/questions/20841466/how-to-convert-json-date-format-to-normal-date-format-ex-date1388412591038
 
-            // console.log("var3: " + var3);
-            // console.log("date1: " + date1);
-            // console.log("dateString1: " + dateString1);
-            //let var4 = currentObject[3][1];
             let var4 = currentObject.purchaseDate;
 
 
             let date2 = new Date(var4);
             date2 = ConvertUTCTimeToLocalTime(date2);
             let correctMonth2 = date2.getMonth() + 1
+<<<<<<< Updated upstream
             let dateString2 = correctMonth2 + "/" + date2.getDate() + "/" + date2.getFullYear();
             // console.log("var4: " + var4);
             // console.log("date2: " + date2);
@@ -122,49 +121,67 @@ $(document).ready(function () {
             // $("#fridgeTableBody").append("<td>" + dateString1 + "</td>");
             // $("#fridgeTableBody").append("<td>" + dateString2 + "</td>");
             // $("#fridgeTableBody").append("<td>" + var5 + "</td></tr>");
+=======
+            let dateString2 = correctMonth2  + "/" + date2.getDate() + "/" + date2.getFullYear();
+>>>>>>> Stashed changes
 
-            // $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td></tr>");
 
+<<<<<<< Updated upstream
             //let today = new Date();
             var usaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
+=======
+            let var5 = currentObject.quantity;
+            var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+>>>>>>> Stashed changes
             usaTime = new Date(usaTime);
-            //console.log('USA time: '+usaTime.toLocaleString())
-            // let dd = String(today.getDate()).padStart(2, '0');
-            // let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            // let yyyy = today.getFullYear();
             let dd = usaTime.getDate();
             let mm = usaTime.getMonth() + 1;
             let yyyy = usaTime.getFullYear();
 
             today = mm + '/' + dd + '/' + yyyy;
             console.log("today: " + today);
+<<<<<<< Updated upstream
             if (var3 != null) {
                 //console.log("hello?");
                 if (yyyy - date1.getFullYear() < 0) {
+=======
+            if(var3 != null){
+                if(yyyy - date1.getFullYear() < 0){
+>>>>>>> Stashed changes
                     //ok - expires later year
                     console.log("expires next year");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
+<<<<<<< Updated upstream
                         "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
                     "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
                     "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
+=======
+                        "Edit" +
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+>>>>>>> Stashed changes
                     "</tr>");
-                    // $("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) < 0) {
                     //ok - expires later month
                     console.log("expires in a later month");
-                    //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
+<<<<<<< Updated upstream
                         "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
                         "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
                         "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
                         "</tr>");
+=======
+                        "Edit" +
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
+>>>>>>> Stashed changes
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) == 0 && dd - date1.getDate() < -2) {
                     //ok - expires later this month
                     console.log("expires later this month")
+<<<<<<< Updated upstream
                     //$("#fridgeTableBody").append("<td id='okCell'>" + "OK" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
@@ -172,12 +189,20 @@ $(document).ready(function () {
                         "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
                         "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
                         "</tr>");
+=======
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='okCell'>" + "OK" + "</td>" + 
+                        "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
+                        "Edit" +
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
+>>>>>>> Stashed changes
                 }
                 else if (yyyy - date1.getFullYear() == 0 && mm - (date1.getMonth() + 1) == 0 && dd - date1.getDate() <= 0) {
                     console.log("expires soon");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" +
                         dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "EXPIRES SOON" + "</td>" +
                         "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
+<<<<<<< Updated upstream
                         "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
                     "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
                     "<label class='form-check-label' for='exampleCheck1'>Use in recipes</label> </div></td>" +
@@ -193,11 +218,17 @@ $(document).ready(function () {
                     //         "</div>" +
                     //     "</div>" +
                     // "</div>" );
+=======
+                        "Edit" +
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
+>>>>>>> Stashed changes
                 }
                 else {
                     //expired
                     console.log(date1);
                     console.log("expiration date passed already.");
+<<<<<<< Updated upstream
                     //$("#fridgeTableBody").append("<td id='expCell'>" + "EXPIRED" + "</td>");
                     $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 +
                         "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" +
@@ -212,6 +243,19 @@ $(document).ready(function () {
                 //$("#fridgeTableBody").append("<td id='almostExp'>" + "CAREFUL" + "</td>");
                 $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 +
                     "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" +
+=======
+                    $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
+                        "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='expCell'>" + "EXPIRED" + "</td>" + 
+                        "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
+                        "Edit" +
+                        "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button></td>" +
+                    "</tr>");
+                }
+            }
+            else{
+                $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + 
+                    "</td><td>" + dateString2 + "</td><td>" + var5 + "</td><td id='almostExp'>" + "CAREFUL" + "</td>" + 
+>>>>>>> Stashed changes
                     "<td><button type='button' class='prepareData btn btn-primary' data-toggle='modal' data-target='#Editor'>" +
                     "Edit" + "</button>" + " <button type='button' class='btn btn-danger itemDelete' >&times; </button>" +
                     "<div class='form-check'> <input type='checkbox' class='form-check-input' id='exampleCheck1'>" +
@@ -219,6 +263,7 @@ $(document).ready(function () {
                     "</tr>");
             }
 
+<<<<<<< Updated upstream
             /*button to edit the items - should trigger a modal*/
             // $("#fridgeTableBody").append("<button type='button' class='updateBtn' data-toggle='modal' data-target='#Editor'>" +
             //                    "Edit" +
@@ -244,6 +289,13 @@ $(document).ready(function () {
 
             //     "<div id='error'></div>" +
             // "</form> </td>");
+=======
+            
+            //******************************************* *
+            //Use this to add a form inside the td. - might want to edit the Edit button above to open a form instead
+            //********************************************* */
+        
+>>>>>>> Stashed changes
         }
 
     }).fail(function (jqXHR) {
@@ -292,18 +344,7 @@ $("#itemConfirm").click(function () {
     });
 });
 
-// $('.modal').on('show.bs.modal', function (e) {
-//     let $trigger = $(e.relatedTarget);
-//     //console.log(e.relatedTarget);
-//     //$(e.relatedTarget).data('button');
-//     //let $row = $(this).closest("tr");
-//     var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
-//     $tds = $row.find("td");             // Finds all children <td> elements
 
-//     $.each($tds, function() {               // Visits every single <td> element
-//         console.log($(this).text());        // Prints out the text within the <td>
-//     });
-// });
 
 $("#getRecipes").click(function () {
 
@@ -400,8 +441,12 @@ $(document).on("click", ".updateBtn", function (event) {
 });
 
 //handle deleting items
+<<<<<<< Updated upstream
 //$('.itemDelete').click(function(){
 $(document).on("click", ".itemDelete", function (event) {
+=======
+$(document).on("click", ".itemDelete", function(event){
+>>>>>>> Stashed changes
     event.stopPropagation();
     event.stopImmediatePropagation();
 
