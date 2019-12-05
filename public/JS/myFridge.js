@@ -353,12 +353,13 @@ $("#getRecipes").click(function () {
            //console.log("Here is a TD: " + $cells.first().innerHTML);
         //ingredients.push($(this).text());
     });
-    console.log(ingredients);
+
     $.ajax({
         type: "GET",
         url: "http://localhost:3000/api/getRecipes",
         data: { ingredients: ingredients }
     }).done(function (data) {
+        
         console.log(data);
     });
 });

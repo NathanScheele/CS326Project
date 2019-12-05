@@ -5,7 +5,8 @@ let UserSchema = new mongoose.Schema({
     email: String,
     password: String,
     fridge: [{name: String, expDate: Date, purchaseDate: Date, quantity: Number}],
-    freezer: [{name: String, expDate: Date, purchaseDate: Date, quantity: Number}]
+    freezer: [{name: String, expDate: Date, purchaseDate: Date, quantity: Number}],
+    recipes: [String]
 });
 
 // Export this schema to make it available from other files
