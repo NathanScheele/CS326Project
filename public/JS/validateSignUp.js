@@ -4,6 +4,8 @@ function validateSignupForm(event) {
     let userName = document.getElementById("signupForm-username");
     let password = document.getElementById("signupForm-password");
     let confirm = document.getElementById("signupForm-passwordc");
+    let email = document.getElementById("signupForm-email");
+    let eReg = new RegExp('/[@]/');
     let ul = document.getElementById("formErrors2");
     let shouldIStop = 0;
     ul.innerHTML = "";
@@ -63,6 +65,14 @@ else if(userName.value.length < 6){
             ul.appendChild(errMsg3);
             shouldIStop = 1;
         }
+    }
+    else if(!(eReg.test(email))){
+        console.log("email is invalid");
+        var errMsg6 = document.createElement("li");
+        email.style.backgroundColor = "Orange";
+        errMsg6.appendChild(document.createTextNode("Email does not contain @ symbol."));
+        ul.appendChild(errMsg6);
+        shouldIStop = 1;
     }
 
     if (shouldIStop === 1){
