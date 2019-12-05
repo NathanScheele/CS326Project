@@ -32,6 +32,3 @@ $("button[name='confirm']").click(function(event) {
     
 });
 
-// function validateLoginForm(event){
-
-// }
