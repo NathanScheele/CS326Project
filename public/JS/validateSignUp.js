@@ -1,5 +1,9 @@
 let signup = document.querySelector("button[name='signup']");
-
+document.getElementById('signupform').onkeypress=function(e){
+    if(e.keyCode==13){
+        document.getElementById('signup').click();
+    }
+}
 function validateSignupForm(event) {
     let userName = document.getElementById("signupForm-username");
     let password = document.getElementById("signupForm-password");
