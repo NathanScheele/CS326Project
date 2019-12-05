@@ -5,7 +5,7 @@ function validateSignupForm(event) {
     let password = document.getElementById("signupForm-password");
     let confirm = document.getElementById("signupForm-passwordc");
     let email = document.getElementById("signupForm-email");
-    let eReg = new RegExp('[@]');
+    let eReg = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
     let ul = document.getElementById("formErrors2");
     let shouldIStop = 0;
     ul.innerHTML = "";
