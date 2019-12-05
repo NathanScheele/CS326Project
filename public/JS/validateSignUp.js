@@ -5,7 +5,7 @@ function validateSignupForm(event) {
     let password = document.getElementById("signupForm-password");
     let confirm = document.getElementById("signupForm-passwordc");
     let email = document.getElementById("signupForm-email");
-    let eReg = new RegExp('/[@]/');
+    let eReg = new RegExp('[@]');
     let ul = document.getElementById("formErrors2");
     let shouldIStop = 0;
     ul.innerHTML = "";
