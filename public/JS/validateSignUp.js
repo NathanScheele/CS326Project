@@ -1,8 +1,5 @@
 //selects sign up button in form to use for activity detection
 let signup = document.querySelector("button[name='signup']");
-
-
-//function for validating credentials entered for signing up 
 document.getElementById('signupform').onkeypress=function(e){
     if(e.keyCode==13){
         document.getElementById('signup').click();
