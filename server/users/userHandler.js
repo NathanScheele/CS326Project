@@ -28,12 +28,12 @@ module.exports = {
           }
           else {//throw an error if the password is incorrect
             console.log("ERROR: invalid password!");
-            res.status(500).send("ERROR: invalid password!");
+            res.status(200).json({ token: "Password-Error" });
           }
         }
         else {//throw an error if the 
           console.log("Error: invalid username!")
-          res.status(500).send("Error: invalid username!");
+          res.status(200).json({ token: "Username-Error" });
         }
       }
     });
