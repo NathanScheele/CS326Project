@@ -353,7 +353,7 @@ $("#getRecipes").click(function () {
         for (let i = 0; i < recipes.length; i++) {
             console.log(recipes[i]);
             $("#recipeTableBody").append("<tr><td class='recipe'>" + recipes[i] + "</td>" +
-                        "<td><button type='button' class='btn btn-success addRecipe' >&plus; </button></td></tr>");
+            "<td><button type='button' class='btn btn-success addRecipe' >&plus; </button></td></tr>");
         }
 
     });
