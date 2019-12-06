@@ -56,7 +56,6 @@ function validateLoginForm(event) {
                 shouldIStop = 1;
             }
         }
-
         if (shouldIStop === 1){
             document.getElementById("formErrors").value = "unverified"
             event.preventDefault();
