@@ -9,7 +9,7 @@ function validateLoginForm(event) {
     let shouldIStop = 0;
     ul.innerHTML = "";
     
-
+    //ensures username field is not left blank
     if(userName.value.length < 1){
             console.log("userName is invalid");
             var errMsg1 = document.createElement("li");
@@ -32,7 +32,7 @@ function validateLoginForm(event) {
                 ul.appendChild(errMsg3);
                 shouldIStop = 1;
             }
-            
+     //ensures username field is longer than six chars       
     }else if(userName.value.length < 6){
             console.log("userName is invalid");
             var errMsg2 = document.createElement("li");
@@ -56,6 +56,7 @@ function validateLoginForm(event) {
                 shouldIStop = 1;
             }
         }
+        //if any issue is found during verification, user cannot proceed with login
         if (shouldIStop === 1){
             document.getElementById("formErrors").value = "unverified"
             event.preventDefault();
