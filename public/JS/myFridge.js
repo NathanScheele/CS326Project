@@ -434,7 +434,6 @@ $(document).on("click", ".itemDelete", function (event) {
 
 
 //handle adding recipes to database
-
 $(document).on("click", ".addRecipe", function (event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -450,10 +449,10 @@ $(document).on("click", ".addRecipe", function (event) {
     // POST a request with the JSON-encoded song to the Server API
     $.ajax({
         type: "PUT",
-        url: "http://localhost:3000/api/updateItem",
-        data: { token: token, newItem: newItem, location: 'fridge' }
+        url: "http://localhost:3000/api/addRecipe",
+        data: { token: token, recipe: url }
     }).done(function (data) {
-        //something
+        console.log("recipe added")
     }).fail(function (jqXHR) {
         $("#error").html("The item could not be added.");
     });

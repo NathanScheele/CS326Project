@@ -32,6 +32,7 @@ module.exports = function(app, express){
   app.put('/api/updateItem', userHandler.updateItem);
   app.put('/api/addRecipe', userHandler.addRecipe);
   app.get('/api/getSavedRecipes', userHandler.getSavedRecipes);
+  app.put('/api/removeRecipe', userHandler.removeRecipe);
   // Add headers
 
 };
