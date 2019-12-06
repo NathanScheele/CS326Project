@@ -349,7 +349,7 @@ $("#getRecipes").click(function () {
     }).done(function (data) {
         console.log(data);
         recipes = data.recipes;
-
+        $("#recipeTableBody").empty();
         for (let i = 0; i < recipes.length; i++) {
             console.log(recipes[i]);
             $("#recipeTableBody").append("<tr><td class='recipe'>" + recipes[i] + "</td>" +
