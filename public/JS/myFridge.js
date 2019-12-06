@@ -61,7 +61,7 @@ $(document).ready(function () {
             JSON.parse*/
         //);
         let itemArray = Object.entries(data);
-        // console.log(itemArray);
+        console.log(itemArray);
         // //sortBy(arr, (s) => -new Date(s));
         // console.log(itemArray);
         // propSort(itemArray, 'expDate', 'purchaseDate', true);
