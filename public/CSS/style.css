@@ -147,6 +147,12 @@ and also iPads specifically.
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
 
+  img{
+    width: 100px;
+    height: 80px;
+    display: block;
+  }
+
 	/* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr { 
 		display: block; 

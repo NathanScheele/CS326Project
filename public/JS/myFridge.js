@@ -24,6 +24,18 @@ propSort = function (array, prop, prop2, desc) {
 //https://www.codeproject.com/Questions/1075115/How-Do-I-Sort-My-Json-Data-Based-On-Date-Column
 
 
+// $(document).on("click", ".addRecipe", function (event) {
+//     event.stopPropagation();
+//     event.stopImmediatePropagation();
+//     $('#myAlert').show()
+// });
+// $(document).ready(function(){
+//     $('.addRecipe').click(function(){
+//         $('#myAlert').show()
+//     }) 
+// });
+// https://stackoverflow.com/questions/30050678/show-bootstrap-alert-box-on-a-button-click/30050889#30050889
+
 /*this function adjusts for time zones */
 function ConvertUTCTimeToLocalTime(UTCDateString) {
     var convertdLocalTime = new Date(UTCDateString);
@@ -100,10 +112,6 @@ $(document).ready(function () {
             let dateString1 = correctMonth1 + "/" + date1.getDate() + "/" + date1.getFullYear();
             //credit: https://stackoverflow.com/questions/20841466/how-to-convert-json-date-format-to-normal-date-format-ex-date1388412591038
 
-            // console.log("var3: " + var3);
-            // console.log("date1: " + date1);
-            // console.log("dateString1: " + dateString1);
-            //let var4 = currentObject[3][1];
             let var4 = currentObject.purchaseDate;
 
 
@@ -111,19 +119,9 @@ $(document).ready(function () {
             date2 = ConvertUTCTimeToLocalTime(date2);
             let correctMonth2 = date2.getMonth() + 1
             let dateString2 = correctMonth2 + "/" + date2.getDate() + "/" + date2.getFullYear();
-            // console.log("var4: " + var4);
-            // console.log("date2: " + date2);
-            // console.log("dateString2: " + dateString2);
 
             //let var5 = currentObject[4][1];
             let var5 = currentObject.quantity;
-            // $("#fridgeTableBody").append("<tr id=" + var1 + ">");
-            // $("#fridgeTableBody").append("<td>" + var2 + "</td>");
-            // $("#fridgeTableBody").append("<td>" + dateString1 + "</td>");
-            // $("#fridgeTableBody").append("<td>" + dateString2 + "</td>");
-            // $("#fridgeTableBody").append("<td>" + var5 + "</td></tr>");
-
-            // $("#fridgeTableBody").append("<tr id=" + var1 + ">" + "<td>" + var2 + "</td><td>" + dateString1 + "</td><td>" + dateString2 + "</td><td>" + var5 + "</td></tr>");
 
             //let today = new Date();
             var usaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
@@ -437,6 +435,9 @@ $(document).on("click", ".itemDelete", function (event) {
 $(document).on("click", ".addRecipe", function (event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
+
+    //$('#myAlert').show();
+    //Display an alert
 
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
