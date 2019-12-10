@@ -1,4 +1,4 @@
-
+/*Populate the page with the current saved recipes. */
 $(document).ready(function () {
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
@@ -24,7 +24,7 @@ $(document).ready(function () {
 });
 
 
-//handle deleting items
+//handle deleting recipes
 //$('.itemDelete').click(function(){
     $(document).on("click", ".recipeDelete", function (event) {
         event.stopPropagation();

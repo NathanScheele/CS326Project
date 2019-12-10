@@ -1,5 +1,7 @@
 //import { doesNotThrow } from "assert";
 
+/*Attept to sort the data, but it didn't work, left here in case time to fix,
+but it is not trivial to sort by date, especially if expiration date is optional */
 propSort = function (array, prop, prop2, desc) {
     array.sort(function (a, b) {
         if (a[prop] == null && b[prop] != null)
@@ -24,6 +26,8 @@ propSort = function (array, prop, prop2, desc) {
 //https://www.codeproject.com/Questions/1075115/How-Do-I-Sort-My-Json-Data-Based-On-Date-Column
 
 
+/*unused code for alerts - they weren't showing and only appear at the top of
+the list anyway so trying to switch to modals */
 // $(document).on("click", ".addRecipe", function (event) {
 //     event.stopPropagation();
 //     event.stopImmediatePropagation();
@@ -52,8 +56,6 @@ function ConvertUTCTimeToLocalTime(UTCDateString) {
 
 //get all of the data for the fridge when you open the page
 $(document).ready(function () {
-
-
     //get jwt token from sessionStorage
     let token = sessionStorage.getItem('token');
 
@@ -64,7 +66,6 @@ $(document).ready(function () {
         data: { "token": token, "location": 'fridge' }
     }).done(function (data) {
         //console.log(data);
-        // edit html
         //console.log(typeof(data));
         //console.log(data[0]) //data[0] is the stuff we want
         /*Object.entries(data).forEach(
@@ -80,21 +81,17 @@ $(document).ready(function () {
         // console.log(itemArray);
 
 
-
+        /*For every item in the fridge, add a table row with buttons */
         for (let i = 0; i < itemArray.length; i++) {
             //let currentObject = Object.entries(data[i]);
             let currentObject = itemArray[i][1];
             console.log(currentObject);
-            //data[i] refers to an object in the fridge
             //currentObject is a key/value pair.
-            //$("#toCurrency").append( $('<option>'+allCurrencies[key]+" ("+key+')</option>').val(key));
             //console.log(currentObject[0]);
             //console.log(currentObject[1]);
             //console.log(currentObject[2]);
-
             // let var1 = currentObject[0][1]; //this is just the id
             // let var2 = currentObject[1][1];
-
             // let var3 = currentObject[2][1];
 
             let var1 = currentObject.id; //this is just the id
@@ -113,7 +110,6 @@ $(document).ready(function () {
             //credit: https://stackoverflow.com/questions/20841466/how-to-convert-json-date-format-to-normal-date-format-ex-date1388412591038
 
             let var4 = currentObject.purchaseDate;
-
 
             let date2 = new Date(var4);
             date2 = ConvertUTCTimeToLocalTime(date2);
@@ -137,7 +133,6 @@ $(document).ready(function () {
             today = mm + '/' + dd + '/' + yyyy;
             console.log("today: " + today);
             if (var3 != null) {
-                //console.log("hello?");
                 if (yyyy - date1.getFullYear() < 0) {
                     //ok - expires later year
                     console.log("expires next year");
@@ -249,9 +244,11 @@ $(document).ready(function () {
     });
 });
 
-oldItemData = [];
-ingredients = [];
+oldItemData = []; //used to update items
+ingredients = []; //used to get recipes
 
+
+/* When you click the edit button, fill oldItemData with the current info for this item */
 $(document).on("click", ".prepareData", function (event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -264,6 +261,8 @@ $(document).on("click", ".prepareData", function (event) {
     });
 });
 
+
+/*Add an item */
 $("#itemConfirm").click(function () {
 
     //get jwt token from sessionStorage
@@ -277,13 +276,13 @@ $("#itemConfirm").click(function () {
         quantity: $('input[name = "quantity"]').val()
     };
 
-    // POST a request with the JSON-encoded song to the Server API
+    // POST a request with the JSON-encoded item to the Server API
     $.ajax({
         type: "PUT",
         url: "http://localhost:3000/api/addItem",
         data: { token: token, item: item, location: 'fridge' }
     }).done(function (data) {
-        // Reset the form after saving the song
+        // Reset the form after saving the item
         $("form").trigger("reset");
     }).fail(function (jqXHR) {
         $("#error").html("The item could not be added.");
@@ -303,6 +302,17 @@ $("#itemConfirm").click(function () {
 //     });
 // });
 
+
+/*Get recipes based on checked items 
+
+********************************************
+If the graders would like to test this, the API is Spoonacular, and
+they have free accounts with limited API points per day - you can
+get an API key and save it as an evironment variable on your machine
+as SPOONACULAR_API_KEY
+Here is one you can use, but you can make your own account if you need
+more points: 7f3b935e0e7942b49692b61a59339e0d
+********************************************/
 $("#getRecipes").click(function () {
 
     // event.stopPropagation();
@@ -351,7 +361,7 @@ $("#getRecipes").click(function () {
         for (let i = 0; i < recipes.length; i++) {
             console.log(recipes[i]);
             $("#recipeTableBody").append("<tr><td class='recipe'>" + recipes[i] + "</td>" +
-                        "<td><button type='button' class='btn btn-success addRecipe' >&plus; </button></td></tr>");
+                        "<td><button type='button' class='btn btn-success addRecipe' data-toggle='modal' data-target='#Notify'>&plus; </button></td></tr>");
         }
 
     });

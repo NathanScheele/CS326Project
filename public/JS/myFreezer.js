@@ -1,3 +1,7 @@
+/*Essentially, this is the same as myFridge.js, except separated out
+for the freezer. Please see myFridge.js for the commented code. */
+
+
 //import { doesNotThrow } from "assert";
 
 propSort = function (array, prop, prop2, desc) {
@@ -353,7 +357,7 @@ $("#getRecipes").click(function () {
         for (let i = 0; i < recipes.length; i++) {
             console.log(recipes[i]);
             $("#recipeTableBody").append("<tr><td class='recipe'>" + recipes[i] + "</td>" +
-            "<td><button type='button' class='btn btn-success addRecipe' >&plus; </button></td></tr>");
+            "<td><button type='button' class='btn btn-success addRecipe' data-toggle='modal' data-target='#Notify'>&plus; </button></td></tr>");
         }
 
     });
