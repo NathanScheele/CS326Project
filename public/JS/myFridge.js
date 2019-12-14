@@ -1,7 +1,8 @@
 //import { doesNotThrow } from "assert";
 
 /*Attept to sort the data, but it didn't work, left here in case time to fix,
-but it is not trivial to sort by date, especially if expiration date is optional */
+but it is not trivial to sort by date, especially if expiration date is optional.
+Also, the boxes are color coded to assist with this anyway. */
 propSort = function (array, prop, prop2, desc) {
     array.sort(function (a, b) {
         if (a[prop] == null && b[prop] != null)
