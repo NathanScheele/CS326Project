@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/NathanScheele/CS326Project/FinishedLogo.png)
+![alt text](FinishedLogo.png)
 
 # What's in my Fridge?
 A web-based application that keeps track of what a user has in their fridge, in order to reduce food waste and make meal planning and grocery shopping easier
