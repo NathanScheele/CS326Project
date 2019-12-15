@@ -28,7 +28,7 @@ propSort = function (array, prop, prop2, desc) {
 
 
 /*unused code for alerts - they weren't showing and only appear at the top of
-the list anyway so trying to switch to modals */
+the list anyway so switched to modals */
 // $(document).on("click", ".addRecipe", function (event) {
 //     event.stopPropagation();
 //     event.stopImmediatePropagation();
